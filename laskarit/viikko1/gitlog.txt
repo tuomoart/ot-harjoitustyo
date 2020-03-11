@@ -1,0 +1,122 @@
+commit e4ae1d2e1168deb82f14edeb3d0db7d6593911b1
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:54:29 2020 +0200
+
+    file1 muuettu
+
+ tiedostoja/file1 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4b3ddd6ebd0dd38920d6ce4d910c9e4da4230415
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:54:02 2020 +0200
+
+    uudelleennimetty ja poistettu
+
+ tiedostoja/{file2 => file22} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 679da7ec38c7e0d232be10cff2899cba6290a35d
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:49:35 2020 +0200
+
+    Tiedostoja lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 11d7e5a877b54f4956ba750ac2a287bd0d6afd8d
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:43:42 2020 +0200
+
+    lisäilty ja poisteltu
+
+ eka.txt    | 2 +-
+ kolmas.txt | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit 4e2ee376ce98f2f9682d2dbb894dca8d7b0fa477
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:41:49 2020 +0200
+
+    uudelleennimetty
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c5d1dd89bd66fb4f2e29371dc761ed8ee2d3e1b5
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:40:39 2020 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 995af9b1628f76f24bca6141c3043b3d483cf5b2
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:38:47 2020 +0200
+
+    tekstiä poistettu ja lisätty
+
+ tiedosto.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 41bc6b34b42ecf7542209e67ce0a6f2e39e42976
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:36:48 2020 +0200
+
+    tekstiä lisätty
+
+ tiedosto.txt | 100 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 100 insertions(+)
+
+commit 48a5e94bab9cb919334caca0610b3cb5445387a4
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:31:09 2020 +0200
+
+    kansio lisätty
+
+ stuff/jokintiedosto | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0210157346447df41043d422568454368989fec2
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:30:01 2020 +0200
+
+    muutoksia
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 251bab44a23034e783dc5de665c548125d1e730c
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:28:21 2020 +0200
+
+    lisäys
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8d287803112db23b4bdeb7e24811d2d33e14be99
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:27:20 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 1b98e3625259bfbf398744282d2631bb8af01d7a
+Author: Tuomo Artama <tuomo.artama@gmail.com>
+Date:   Wed Mar 11 17:24:33 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
