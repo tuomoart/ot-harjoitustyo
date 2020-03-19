@@ -1,4 +1,13 @@
 # Ohjelmistotekniikka, harjoitustyö
+## Harjoitustyö
+### Dokumentointi
+
+[Työaikakirjanpito]()
+
+#### Määrittelydokumentti
+
+[Alustava määrittelydokumentti]()
+
 ## Tehtävät
 ### Viikko 1
 *Tässä* on **tekstiä**
@@ -10,7 +19,3 @@
 ### Viikko 2
 
 [viikko2](https://github.com/tuomoart/ot-harjoitustyo/tree/master/laskarit/viikko2)
-
-Tässä on muutos
-
-Ja toinenkin
