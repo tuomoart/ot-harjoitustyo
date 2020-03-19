@@ -2,11 +2,11 @@
 ## Harjoitustyö
 ### Dokumentointi
 
-[Työaikakirjanpito]()
+[Työaikakirjanpito](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/Tyoaikakirjanpito.md)
 
 #### Määrittelydokumentti
 
-[Alustava määrittelydokumentti]()
+[Alustava määrittelydokumentti](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/Alustava%20m%C3%A4%C3%A4rittelydokumentti.md)
 
 ## Tehtävät
 ### Viikko 1
