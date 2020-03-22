@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fraktaali;
-
-import ui.UiMain;
+package ui;
 
 /**
  *
  * @author tuomoart
  */
-public class Main {
-    public static void main(String[] args) {
-        UiMain.main(args);
-    }
+public class Gui {
+    
 }
