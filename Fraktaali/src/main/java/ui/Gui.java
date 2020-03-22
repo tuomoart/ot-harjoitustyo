@@ -5,11 +5,13 @@
  */
 package ui;
 
+import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +25,8 @@ import javafx.stage.Stage;
 public class Gui extends Application {
     private Label status;
     private Canvas drawing;
+    private GraphicsContext drawer;
+    private int drawArea=500;
     
     @Override
     public void start(Stage window) {
@@ -41,7 +45,8 @@ public class Gui extends Application {
             generateButtonAction();
         });
         
-        this.drawing = new Canvas(500,500);
+        this.drawing = new Canvas(drawArea,drawArea);
+        this.drawer = this.drawing.getGraphicsContext2D();
         layout.setCenter(this.drawing);
         
         Scene scene = new Scene(layout);
@@ -52,7 +57,12 @@ public class Gui extends Application {
     
     public void generateButtonAction() {
         status.setText("Generating...");
-        
+        Random r = new Random();
+        int i=0;
+        while (i<100) {
+            this.drawer.fillOval(r.nextDouble()*this.drawArea, r.nextDouble()*this.drawArea, 4, 4);
+            i++;
+        }
     }
     
     public void draw() {
