@@ -5,6 +5,7 @@
  */
 package fraktaali;
 
+import domain.Fractal;
 import ui.UiMain;
 
 /**
