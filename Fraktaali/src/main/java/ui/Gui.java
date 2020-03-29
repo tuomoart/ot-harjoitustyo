@@ -91,7 +91,7 @@ public class Gui extends Application {
     
     public void zoomSliderChangeAction(Number value) {
         double doubleValue = value.doubleValue();
-        String text = String.format("Magnification: %1.1f",doubleValue);
+        String text = String.format("Magnification: %1.1f", doubleValue);
         this.zoomLabel.setText(text + "x");
         double temp = 1.0*drawArea/doubleValue;
         this.generator.setAreaHeight(1.0*temp);

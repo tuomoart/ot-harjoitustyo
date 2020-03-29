@@ -51,6 +51,8 @@ public class FractalTest {
                     {false,false,true,false,false,false,false},
                     {false,false,true,false,false,false,false}};
         
+        fractal.setAreaHeight(7);
+        fractal.setAreaWidth(7);
         boolean[][] returned = fractal.generateJuliaSet(7, 7);
         
         assertArrayEquals(correct,returned);
@@ -75,6 +77,18 @@ public class FractalTest {
         assertEquals(originalValue, this.fractal.getIterations());
         this.fractal.setIterations(-10);
         assertEquals(originalValue, this.fractal.getIterations());
+    }
+    
+    @Test
+    public void setXWorks() {
+        this.fractal.setX(100);
+        assertEquals(100,this.fractal.getX(),0.001);
+    }
+    
+    @Test
+    public void setYWorks() {
+        this.fractal.setY(100);
+        assertEquals(100,this.fractal.getY(),0.001);
     }
     
     
