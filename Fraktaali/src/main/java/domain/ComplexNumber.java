@@ -1,22 +1,30 @@
 package domain;
 
 public class ComplexNumber {
-    private double a, b;
+    private double real, img;
 
-    public ComplexNumber(double a, double b){
-        this.a = a;
-        this.b = b;
-    }
-
-    public ComplexNumber square(){
-        return new ComplexNumber(this.a*this.a - this.b*this.b, 2*this.a*this.b);
+    public ComplexNumber(double real, double img) {
+        this.real = real;
+        this.img = img;
     }
     
-    public ComplexNumber add(ComplexNumber cn){
-        return new ComplexNumber(this.a+cn.a, this.b+cn.b);
+    public double getReal() {
+        return this.real;
+    }
+    
+    public double getImg() {
+        return this.img;
     }
 
-    public double magnitude(){
-        return a*a+b*b;
+    public ComplexNumber square() {
+        return new ComplexNumber(this.real*this.real - this.img*this.img, 2*this.real*this.img);
+    }
+    
+    public ComplexNumber add(ComplexNumber cn) {
+        return new ComplexNumber(this.real+cn.real, this.img+cn.img);
+    }
+
+    public double magnitude() {
+        return real*real+img*img;
     }
 }

@@ -18,12 +18,18 @@ public class Fractal {
     private double threshold = 1;
     private int iterations = 50;
 
-    public Fractal(){
+    public Fractal() {
 
     }
     
+    public int getIterations() {
+        return this.iterations;
+    }
+    
     public void setIterations(int iterations) {
-        this.iterations=iterations;
+        if (iterations>0) {
+            this.iterations=iterations;
+        }
     }
     
     public boolean[][] generateJuliaSet(int w, int h) {
@@ -33,7 +39,7 @@ public class Fractal {
         return this.values;
     }
     
-    private void getValues(){
+    private void getValues() {
         values = new boolean[width][height];
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
@@ -44,7 +50,7 @@ public class Fractal {
         }
     }
     
-    private boolean isInSet(ComplexNumber cn){
+    private boolean isInSet(ComplexNumber cn) {
         for(int i=0;i<iterations;i++){
             cn = cn.square().add(c);
         }

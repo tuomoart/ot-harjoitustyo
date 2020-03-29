@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fraktaali;
+package fractal;
 
 import domain.Fractal;
+import java.util.Arrays;
 import ui.UiMain;
 
 /**
