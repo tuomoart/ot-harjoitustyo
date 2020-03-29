@@ -5,6 +5,11 @@ import java.util.Arrays;
 public class Fractal {
     private int width = 350;
     private int height = 350;
+    
+    private double x=0;
+    private double y=0;
+    private double areaWidth = 350;
+    private double areaHeight = 350;
 
     private static ComplexNumber c = new ComplexNumber(-0.223, 0.745);
 
@@ -26,10 +31,34 @@ public class Fractal {
         return this.iterations;
     }
     
+    public double getX() {
+        return this.x;
+    }
+    
+    public double getY() {
+        return this.y;
+    }
+    
     public void setIterations(int iterations) {
         if (iterations>0) {
             this.iterations=iterations;
         }
+    }
+    
+    public void setX(double x) {
+        this.x=x;
+    }
+    
+    public void setY(double y) {
+        this.y=y;
+    }
+    
+    public void setAreaWidth(double areaWidth) {
+        this.areaWidth=areaWidth;
+    }
+    
+    public void setAreaHeight(double areaHeight) {
+        this.areaHeight=areaHeight;
     }
     
     public boolean[][] generateJuliaSet(int w, int h) {
@@ -42,9 +71,11 @@ public class Fractal {
     private void getValues() {
         values = new boolean[width][height];
         for(int i=0;i<width;i++){
+            double it = 1.0*x+1.0*i*areaWidth/width;
             for(int j=0;j<height;j++){
-		double a = (double)i*(maxX-minX)/(double)width + minX;
-		double b = (double)j*(maxY-minY)/(double)height + minY;
+                double jt = 1.0*y+1.0*j*areaHeight/height;
+		double a = it*(maxX-minX)/(double)width + minX;
+		double b = jt*(maxY-minY)/(double)height + minY;
                 values[i][j] = isInSet(new ComplexNumber(a,b));
             }
         }

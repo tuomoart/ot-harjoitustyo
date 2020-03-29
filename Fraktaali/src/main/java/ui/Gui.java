@@ -22,6 +22,8 @@ public class Gui extends Application {
     private Label status;
     private Label iterationsLabel;
     private Slider iterationsSlider;
+    private Label zoomLabel;
+    private Slider zoomSlider;
     private Canvas drawing;
     private GraphicsContext drawer;
     private int drawArea=500;
@@ -31,6 +33,8 @@ public class Gui extends Application {
     @Override
     public void start(Stage window) {
         this.generator=new Fractal();
+        this.generator.setAreaWidth(drawArea);
+        this.generator.setAreaHeight(drawArea);
         this.window=window;
         
         window.setTitle("Fractal generator");
@@ -48,9 +52,19 @@ public class Gui extends Application {
         this.iterationsSlider.setShowTickLabels(true);
         this.iterationsSlider.setShowTickMarks(true);
         this.iterationsSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-            sliderChangeAction(new_val);
+            iterationsSliderChangeAction(new_val);
         });
         leftSide.getChildren().add(this.iterationsSlider);
+        
+        this.zoomSlider = new Slider(1,3,1);
+        this.zoomLabel = new Label("Magnification: " + this.zoomSlider.getValue() + "x");
+        leftSide.getChildren().add(this.zoomLabel);
+        this.zoomSlider.setShowTickLabels(true);
+        this.zoomSlider.setShowTickMarks(true);
+        this.zoomSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+            zoomSliderChangeAction(new_val);
+        });
+        leftSide.getChildren().add(this.zoomSlider);
         
         Button generateButton = new Button("Generate");
         leftSide.getChildren().add(generateButton);
@@ -68,16 +82,30 @@ public class Gui extends Application {
         this.window.show();
     }
     
-    public void sliderChangeAction(Number value) {
+    public void iterationsSliderChangeAction(Number value) {
         int intvalue = value.intValue();
         this.iterationsLabel.setText("Iterations: " + intvalue);
         this.generator.setIterations(intvalue);
         draw();
     }
     
+    public void zoomSliderChangeAction(Number value) {
+        double doubleValue = value.doubleValue();
+        String text = String.format("Magnification: %1.1f",doubleValue);
+        this.zoomLabel.setText(text + "x");
+        double temp = 1.0*drawArea/doubleValue;
+        this.generator.setAreaHeight(1.0*temp);
+        this.generator.setAreaWidth(1.0*temp);
+        this.generator.setX(1.0*drawArea/2-temp/2);
+        this.generator.setY(1.0*drawArea/2-temp/2);
+        draw();
+    }
+    
     public void generateButtonAction() {
         this.status.setText("Generating...");
         generator.setIterations((int) this.iterationsSlider.getValue());
+        this.generator.setAreaWidth(250);
+        this.generator.setAreaHeight(250);
         draw();
     }
     
