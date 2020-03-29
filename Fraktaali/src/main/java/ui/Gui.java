@@ -3,6 +3,8 @@ package ui;
 import domain.Fractal;
 import java.util.Random;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -17,10 +20,11 @@ import javafx.stage.Stage;
 
 public class Gui extends Application {
     private Label status;
-    private TextField iterationsBox;
+    private Label iterationsLabel;
+    private Slider iterationsSlider;
     private Canvas drawing;
     private GraphicsContext drawer;
-    private int drawArea=1000;
+    private int drawArea=500;
     private Fractal generator;
     private Stage window;
     
@@ -37,8 +41,16 @@ public class Gui extends Application {
         
         this.status = new Label("");
         leftSide.getChildren().add(this.status);
-        this.iterationsBox=new TextField("50");
-        leftSide.getChildren().add(this.iterationsBox);
+        
+        this.iterationsLabel = new Label("Iterations: " + this.generator.getIterations());
+        leftSide.getChildren().add(this.iterationsLabel);
+        this.iterationsSlider = new Slider(0,100,50);
+        this.iterationsSlider.setShowTickLabels(true);
+        this.iterationsSlider.setShowTickMarks(true);
+        this.iterationsSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+            sliderChangeAction(new_val);
+        });
+        leftSide.getChildren().add(this.iterationsSlider);
         
         Button generateButton = new Button("Generate");
         leftSide.getChildren().add(generateButton);
@@ -56,10 +68,23 @@ public class Gui extends Application {
         this.window.show();
     }
     
+    public void sliderChangeAction(Number value) {
+        int intvalue = value.intValue();
+        this.iterationsLabel.setText("Iterations: " + intvalue);
+        this.generator.setIterations(intvalue);
+        draw();
+    }
+    
     public void generateButtonAction() {
         this.status.setText("Generating...");
-        generator.setIterations(Integer.valueOf(this.iterationsBox.getText()));
+        generator.setIterations((int) this.iterationsSlider.getValue());
+        draw();
+    }
+    
+    public void draw() {
         boolean[][] grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
+        
+        this.drawer.clearRect(0, 0, drawing.getWidth(), drawing.getHeight());
         
         for (int y=0;y<grid.length; y++) {
             for (int x=0; x<grid[y].length; x++) {
@@ -68,10 +93,6 @@ public class Gui extends Application {
                 }
             }
         }
-    }
-    
-    public void draw() {
-        
     }
     
     public void begin() {
