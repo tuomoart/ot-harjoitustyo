@@ -56,7 +56,7 @@ public class Gui extends Application {
         });
         leftSide.getChildren().add(this.iterationsSlider);
         
-        this.zoomSlider = new Slider(1,3,1);
+        this.zoomSlider = new Slider(1,5,1);
         this.zoomLabel = new Label("Magnification: " + this.zoomSlider.getValue() + "x");
         leftSide.getChildren().add(this.zoomLabel);
         this.zoomSlider.setShowTickLabels(true);
@@ -93,20 +93,23 @@ public class Gui extends Application {
         double doubleValue = value.doubleValue();
         String text = String.format("Magnification: %1.1f", doubleValue);
         this.zoomLabel.setText(text + "x");
-        double temp = 1.0*drawArea/doubleValue;
-        this.generator.setAreaHeight(1.0*temp);
-        this.generator.setAreaWidth(1.0*temp);
-        this.generator.setX(1.0*drawArea/2-temp/2);
-        this.generator.setY(1.0*drawArea/2-temp/2);
+        updateZoomSettings(doubleValue);
         draw();
     }
     
     public void generateButtonAction() {
         this.status.setText("Generating...");
         generator.setIterations((int) this.iterationsSlider.getValue());
-        this.generator.setAreaWidth(250);
-        this.generator.setAreaHeight(250);
+        updateZoomSettings(this.zoomSlider.getValue());
         draw();
+    }
+    
+    public void updateZoomSettings(double zoom) {
+        double temp = 1.0*drawArea/zoom;
+        this.generator.setAreaHeight(1.0*temp);
+        this.generator.setAreaWidth(1.0*temp);
+        this.generator.setX(1.0*drawArea/2-temp/2);
+        this.generator.setY(1.0*drawArea/2-temp/2);
     }
     
     public void draw() {
