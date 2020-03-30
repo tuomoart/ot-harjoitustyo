@@ -5,6 +5,8 @@ Sovelluksen avulla on mahdollista luoda ja tarkastella Julia-fraktaaleja. Täll�
 - Kuvan tarkkuutta voi muokata vaihtelemalla iteraatioiden määrää
 - Kuvaa voi suurentaa, mutta vain kohti keskikohtaa
 
+HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 ei toiminut oikein yliopiston etätyöpyödällä tai melkillä.
+
 Sovelluksen voi suorittaa komennolla:
 `mvn compile exec:java -Dexec.mainClass=fractal.Main`
 
