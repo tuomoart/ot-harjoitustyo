@@ -6,4 +6,5 @@
 
 <suppressions>
     <suppress files="ui.Gui.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="ui.UiMain.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>
