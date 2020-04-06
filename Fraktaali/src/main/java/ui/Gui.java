@@ -27,11 +27,13 @@ import javax.imageio.ImageIO;
 
 public class Gui extends Application {
     private Label status;
+    private Label numberLabel;
+    private Slider realSlider;
+    private Slider imaginarySlider;
     private Label iterationsLabel;
     private Slider iterationsSlider;
     private Label zoomLabel;
     private Slider zoomSlider;
-    private Label positionLabel;
     private Canvas drawing;
     private GraphicsContext drawer;
     private int drawArea=500;
@@ -55,6 +57,27 @@ public class Gui extends Application {
         //Status-label
         this.status = new Label("");
         leftSide.getChildren().add(this.status);
+        
+        //Label and sliders for selecting the imaginary number to base the Julia set off of
+        this.numberLabel = new Label("Imaginary number: " + this.generator.getReal()
+                + "+" + this.generator.getImg() + "i");
+        leftSide.getChildren().add(this.numberLabel);
+        this.realSlider = new Slider(-1,1,this.generator.getReal());
+        this.realSlider.setMajorTickUnit(1);
+        this.realSlider.setShowTickLabels(true);
+        this.realSlider.setShowTickMarks(true);
+        this.realSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+            realSliderChangeAction(new_val);
+        });
+        leftSide.getChildren().add(this.realSlider);
+        this.imaginarySlider = new Slider(-1,1,this.generator.getImg());
+        this.imaginarySlider.setMajorTickUnit(1);
+        this.imaginarySlider.setShowTickLabels(true);
+        this.imaginarySlider.setShowTickMarks(true);
+        this.imaginarySlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+            imaginarySliderChangeAction(new_val);
+        });
+        leftSide.getChildren().add(this.imaginarySlider);
         
         //Label and slider for setting iterations
         this.iterationsLabel = new Label("Iterations: " + this.generator.getIterations());
@@ -101,6 +124,26 @@ public class Gui extends Application {
         
         this.window.setScene(scene);
         this.window.show();
+    }
+    
+    public void realSliderChangeAction(Number value) {
+        double dvalue = value.doubleValue();
+        String formattedRealValue = String.format("%1.3f", dvalue);
+        String formattedImaginaryValue = String.format("%1.3f", this.generator.getImg());
+        this.numberLabel.setText("Imaginary number: " + formattedRealValue
+                + "+" + formattedImaginaryValue + "i");
+        this.generator.setNumber(dvalue, this.generator.getImg());
+        draw();
+    }
+    
+    public void imaginarySliderChangeAction(Number value) {
+        double dvalue = value.doubleValue();
+        String formattedRealValue = String.format("%1.3f", this.generator.getReal());
+        String formattedImaginaryValue = String.format("%1.3f", dvalue);
+        this.numberLabel.setText("Imaginary number: " + formattedRealValue
+                + "+" + formattedImaginaryValue + "i");
+        this.generator.setNumber(this.generator.getReal(), dvalue);
+        draw();
     }
     
     public void iterationsSliderChangeAction(Number value) {

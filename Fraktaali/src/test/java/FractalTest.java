@@ -91,5 +91,24 @@ public class FractalTest {
         assertEquals(100,this.fractal.getY(),0.001);
     }
     
+    @Test
+    public void getRealWorks() {
+        assertEquals(-0.223,this.fractal.getReal(),0.00001);
+    }
+    
+    @Test
+    public void getImgWorks() {
+        assertEquals(0.745,this.fractal.getImg(),0.00001);
+    }
+    
+    @Test
+    public void setNumberWorks() {
+        double r = 0.1;
+        double i = -0.1;
+        this.fractal.setNumber(r,i);
+        assertEquals(r,this.fractal.getReal(),0.00001);
+        assertEquals(i,this.fractal.getImg(),0.00001);
+    }
+    
     
 }

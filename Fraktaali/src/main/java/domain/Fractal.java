@@ -11,7 +11,7 @@ public class Fractal {
     private double areaWidth = 350;
     private double areaHeight = 350;
 
-    private static ComplexNumber c = new ComplexNumber(-0.223, 0.745);
+    private ComplexNumber c = new ComplexNumber(-0.223, 0.745);
 
     private boolean[][] values = null;
 
@@ -39,6 +39,14 @@ public class Fractal {
         return this.y;
     }
     
+    public double getReal() {
+        return this.c.getReal();
+    }
+    
+    public double getImg() {
+        return this.c.getImg();
+    }
+    
     public void setIterations(int iterations) {
         if (iterations > 0) {
             this.iterations = iterations;
@@ -59,6 +67,10 @@ public class Fractal {
     
     public void setAreaHeight(double areaHeight) {
         this.areaHeight = areaHeight;
+    }
+    
+    public void setNumber(double r, double i) {
+        this.c = new ComplexNumber(r,i);
     }
     
     public boolean[][] generateJuliaSet(int w, int h) {
