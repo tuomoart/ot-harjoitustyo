@@ -17,14 +17,14 @@ public class ComplexNumber {
     }
 
     public ComplexNumber square() {
-        return new ComplexNumber(this.real*this.real - this.img*this.img, 2*this.real*this.img);
+        return new ComplexNumber(this.real * this.real - this.img * this.img, 2 * this.real * this.img);
     }
     
     public ComplexNumber add(ComplexNumber cn) {
-        return new ComplexNumber(this.real+cn.real, this.img+cn.img);
+        return new ComplexNumber(this.real + cn.real, this.img + cn.img);
     }
 
     public double magnitude() {
-        return real*real+img*img;
+        return real * real + img * img;
     }
 }
