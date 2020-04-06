@@ -11,17 +11,18 @@ Sovellus koostuu yhdestä näkymästä
 
 ## Perusversion tarjoama toiminnallisuus
 
-Toiminnallisuudet perusversiossa riippuvat pitkälti siitä, miten monimutkaisia niiden rakentaminen on. Toimintoina tulisi olla ainakin:
-- Käytettävän funktion valinta (tai ainakin tulisi nähdä mitä funktiota käytetään)
-- Piirtoalan valinta
-- Piirretyn fraktaalin tallentaminen
+Sovelluksen perustoiminnallisuudet:
+- Käytettävän imaginääriluvun valinta (tehty)
+- Piirtoalan valinta (tehty)
+- Piirretyn fraktaalin tallentaminen (tehty)
 
 ## Jatkokehitys
 
 Jos ja kun aikaa jää, voisi sovellukseen lisätä seuraavia toimintoja:
 
-- Piirtoalan siirtely hiirellä vetämällä
-- Piirtoalan zoomaaminen
-- Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan
-- Reaaliaikainen uudelleenpiirto kun fraktaalifunktiota muokataan
+- Piirtoalan siirtely hiirellä vetämällä (tehty)
+- Piirtoalan zoomaaminen (tehty)
+- Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan (tehty)
+- Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan (tehty)
+- Reset-nappi
 - Eri tyyppisten fraktaalien muodostaminen, kuten Mandelbrot
