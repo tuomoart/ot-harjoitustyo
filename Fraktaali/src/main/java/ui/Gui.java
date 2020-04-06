@@ -1,6 +1,10 @@
 package ui;
 
 import domain.Fractal;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import javafx.embed.swing.SwingFXUtils;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -14,9 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 public class Gui extends Application {
     private Label status;
@@ -24,6 +31,7 @@ public class Gui extends Application {
     private Slider iterationsSlider;
     private Label zoomLabel;
     private Slider zoomSlider;
+    private Label positionLabel;
     private Canvas drawing;
     private GraphicsContext drawer;
     private int drawArea=500;
@@ -39,13 +47,16 @@ public class Gui extends Application {
         
         window.setTitle("Fractal generator");
         
+        //Create the layout
         BorderPane layout = new BorderPane();
         VBox leftSide = new VBox();
         layout.setLeft(leftSide);
         
+        //Status-label
         this.status = new Label("");
         leftSide.getChildren().add(this.status);
         
+        //Label and slider for setting iterations
         this.iterationsLabel = new Label("Iterations: " + this.generator.getIterations());
         leftSide.getChildren().add(this.iterationsLabel);
         this.iterationsSlider = new Slider(0,100,50);
@@ -56,6 +67,7 @@ public class Gui extends Application {
         });
         leftSide.getChildren().add(this.iterationsSlider);
         
+        //Label and slider for magnification
         this.zoomSlider = new Slider(1,5,1);
         this.zoomLabel = new Label("Magnification: " + this.zoomSlider.getValue() + "x");
         leftSide.getChildren().add(this.zoomLabel);
@@ -66,12 +78,21 @@ public class Gui extends Application {
         });
         leftSide.getChildren().add(this.zoomSlider);
         
+        //Generate-button
         Button generateButton = new Button("Generate");
         leftSide.getChildren().add(generateButton);
         generateButton.setOnAction((event) -> {
             generateButtonAction();
         });
         
+        //Save-button
+        Button saveButton = new Button("Save...");
+        leftSide.getChildren().add(saveButton);
+        saveButton.setOnAction((event) -> {
+            saveButtonAction();
+        });
+        
+        //Create the drawing area
         this.drawing = new Canvas(drawArea,drawArea);
         this.drawer = this.drawing.getGraphicsContext2D();
         layout.setCenter(this.drawing);
@@ -98,10 +119,29 @@ public class Gui extends Application {
     }
     
     public void generateButtonAction() {
-        this.status.setText("Generating...");
         generator.setIterations((int) this.iterationsSlider.getValue());
         updateZoomSettings(this.zoomSlider.getValue());
         draw();
+    }
+    
+    public void saveButtonAction() {
+        FileChooser fileChooser = new FileChooser();
+        
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        File f = fileChooser.showSaveDialog(window);
+        
+        if (f != null) {
+            try {
+                WritableImage wi = new WritableImage(drawArea,drawArea);
+                drawing.snapshot(null, wi);
+                RenderedImage ri = SwingFXUtils.fromFXImage(wi,null);
+                ImageIO.write(ri, "png", f);
+            } catch (IOException e) {
+                
+            }
+        }
     }
     
     public void updateZoomSettings(double zoom) {
