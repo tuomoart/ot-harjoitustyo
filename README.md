@@ -6,7 +6,7 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/Alustava%20m%C3%A4%C3%A4rittelydokumentti.md)
+[Vaatimusmäärittely](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)
 
 [Arkkitehtuuri](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
 
