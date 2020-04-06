@@ -105,13 +105,6 @@ public class Gui extends Application {
         });
         leftSide.getChildren().add(this.zoomSlider);
         
-        //Generate-button
-        Button generateButton = new Button("Generate");
-        leftSide.getChildren().add(generateButton);
-        generateButton.setOnAction((event) -> {
-            generateButtonAction();
-        });
-        
         //Save-button
         Button saveButton = new Button("Save...");
         leftSide.getChildren().add(saveButton);
@@ -180,12 +173,6 @@ public class Gui extends Application {
         String text = String.format("Magnification: %1.1f", doubleValue);
         this.zoomLabel.setText(text + "x");
         this.zoom = doubleValue;
-        draw();
-    }
-    
-    public void generateButtonAction() {
-        generator.setIterations((int) this.iterationsSlider.getValue());
-        this.zoom = this.zoomSlider.getValue();
         draw();
     }
     
