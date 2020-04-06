@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -39,6 +40,9 @@ public class Gui extends Application {
     private int drawArea=500;
     private Fractal generator;
     private Stage window;
+    
+    private double x0=0, y0=0, transX, transY;
+    private double zoom=1;
     
     @Override
     public void start(Stage window) {
@@ -117,12 +121,30 @@ public class Gui extends Application {
         
         //Create the drawing area
         this.drawing = new Canvas(drawArea,drawArea);
+        this.drawing.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                transX = t.getSceneX() - x0;
+                transY = t.getSceneY() - y0;
+            }
+        });
+        this.drawing.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                x0 = -t.getSceneX() + transX;
+                y0 = -t.getSceneY() + transY;
+                draw();
+            }
+        });
         this.drawer = this.drawing.getGraphicsContext2D();
         layout.setCenter(this.drawing);
         
         Scene scene = new Scene(layout);
         
         this.window.setScene(scene);
+        draw();
         this.window.show();
     }
     
@@ -157,13 +179,13 @@ public class Gui extends Application {
         double doubleValue = value.doubleValue();
         String text = String.format("Magnification: %1.1f", doubleValue);
         this.zoomLabel.setText(text + "x");
-        updateZoomSettings(doubleValue);
+        this.zoom = doubleValue;
         draw();
     }
     
     public void generateButtonAction() {
         generator.setIterations((int) this.iterationsSlider.getValue());
-        updateZoomSettings(this.zoomSlider.getValue());
+        this.zoom = this.zoomSlider.getValue();
         draw();
     }
     
@@ -187,15 +209,13 @@ public class Gui extends Application {
         }
     }
     
-    public void updateZoomSettings(double zoom) {
+    public void draw() {
         double temp = 1.0*drawArea/zoom;
         this.generator.setAreaHeight(1.0*temp);
         this.generator.setAreaWidth(1.0*temp);
-        this.generator.setX(1.0*drawArea/2-temp/2);
-        this.generator.setY(1.0*drawArea/2-temp/2);
-    }
-    
-    public void draw() {
+        this.generator.setX(x0+1.0*drawArea/2-temp/2);
+        this.generator.setY(y0+1.0*drawArea/2-temp/2);
+
         boolean[][] grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
         
         this.drawer.clearRect(0, 0, drawing.getWidth(), drawing.getHeight());

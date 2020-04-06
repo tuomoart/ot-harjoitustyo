@@ -83,9 +83,9 @@ public class Fractal {
     private void getValues() {
         values = new boolean[width][height];
         for (int i = 0; i < width; i++) {
-            double it = 1.0 * x + 1.0 * i * areaWidth / width;
+            double it = 1.0 * y + 1.0 * i * areaWidth / width;
             for (int j = 0; j < height; j++) {
-                double jt = 1.0 * y + 1.0 * j * areaHeight / height;
+                double jt = 1.0 * x + 1.0 * j * areaHeight / height;
                 double a = it * (maxX - minX) / (double) width + minX;
                 double b = jt * (maxY - minY) / (double) height + minY;
                 values[i][j] = isInSet(new ComplexNumber(a, b));
