@@ -70,7 +70,7 @@ public class Fractal {
     }
     
     public void setNumber(double r, double i) {
-        this.c = new ComplexNumber(r,i);
+        this.c = new ComplexNumber(r, i);
     }
     
     public boolean[][] generateJuliaSet(int w, int h) {
