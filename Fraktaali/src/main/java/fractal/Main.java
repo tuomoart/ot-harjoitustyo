@@ -5,8 +5,6 @@
  */
 package fractal;
 
-import domain.Fractal;
-import java.util.Arrays;
 import ui.UiMain;
 
 /**
