@@ -124,5 +124,13 @@ public class FractalTest {
         assertEquals(i,this.fractal.getImg(),0.00001);
     }
     
-    
+    @Test
+    public void getWidthWorks() throws Exception {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("config.properties"));
+        int correct = Integer.valueOf(properties.getProperty("drawAreaSize"));
+        
+        assertEquals(correct, this.fractal.getWidth());
+        
+    }
 }

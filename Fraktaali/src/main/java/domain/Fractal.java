@@ -117,14 +117,11 @@ public class Fractal {
     public boolean[][] undo() {
         try {
             unpackSettings(history.undo());
-        
-            getValues();
-            return this.values;
         } catch (SQLException e) {
-            //TODO make return default values
-            return null;
+            loadToDefaults();
         }
-        
+        getValues();
+        return this.values;
     }
     
     public void unpackSettings(String settings) {
