@@ -6,10 +6,12 @@
 package DAO;
 
 import domain.Fractal;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,6 +25,7 @@ import static org.junit.Assert.*;
  */
 public class SQLiteHistoryDaoTest {
     private SQLiteHistoryDao dao;
+    private Properties properties;
     
     public SQLiteHistoryDaoTest() {
     }
@@ -36,8 +39,14 @@ public class SQLiteHistoryDaoTest {
     }
     
     @Before
-    public void setUp() {
-        this.dao = new SQLiteHistoryDao("test.db");
+    public void setUp() throws Exception {
+        try {
+            this.properties = new Properties();
+            properties.load(new FileInputStream("config.properties"));
+            this.dao = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
+        } catch (SQLException e) {
+            
+        }
     }
     
     @After
@@ -46,36 +55,15 @@ public class SQLiteHistoryDaoTest {
     
     @Test
     public void constructorTest() {
-        SQLiteHistoryDao testDao = new SQLiteHistoryDao("test.db");
+        try {
+            SQLiteHistoryDao testDao = new SQLiteHistoryDao("test.db");
+        } catch (SQLException e) {
+            fail("Constructor threw an exception");
+        }
     }
     
     @Test
-    public void saveModificationSimpleWorks() {
-        this.dao.saveModification("1,2,3,4");
-        assertEquals("1,2,3,4",this.dao.getLatest());
-    }
-    
-    @Test
-    public void saveModificationFromFractalWorks() {
-        Fractal f = new Fractal(this.dao);
-        
-        f.setIterations(35);
-        f.setNumber(0.3,0.5);
-        
-        f.generateJuliaSet(10, 10);
-        
-        f.setIterations(100);
-        f.setNumber(1,1);
-        
-        f.getLatestSettings();
-        
-        assertEquals(35,f.getIterations());
-        assertEquals(0.3,f.getReal(),0.0001);
-        assertEquals(0.5,f.getImg(),0.0001);
-    }
-    
-    @Test
-    public void undoSimpleWorks() {
+    public void undoSimpleWorks() throws SQLException {
         this.dao.saveModification("1,2,3,4");
         this.dao.saveModification("5,6,7,8");
         
@@ -84,7 +72,7 @@ public class SQLiteHistoryDaoTest {
     
     @Test
     public void undoFromFractalWorks() {
-        Fractal f = new Fractal(this.dao);
+        Fractal f = new Fractal(this.dao, properties);
         
         f.setIterations(35);
         f.setNumber(0.3,0.5);
@@ -102,5 +90,6 @@ public class SQLiteHistoryDaoTest {
         assertEquals(0.3,f.getReal(),0.0001);
         assertEquals(0.5,f.getImg(),0.0001);
     }
+    
 
 }

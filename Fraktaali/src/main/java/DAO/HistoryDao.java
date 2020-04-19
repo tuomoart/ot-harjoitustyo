@@ -1,7 +1,8 @@
 package DAO;
 
+import java.sql.SQLException;
+
 public interface HistoryDao {
-    void saveModification(String settings);
-    String undo();
-    String getLatest();
+    void saveModification(String settings) throws SQLException;
+    String undo() throws SQLException;
 }

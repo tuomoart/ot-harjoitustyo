@@ -9,6 +9,9 @@ package domain;
 import DAO.HistoryDao;
 import DAO.SQLiteHistoryDao;
 import domain.Fractal;
+import java.io.FileInputStream;
+import java.sql.SQLException;
+import java.util.Properties;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -22,7 +25,7 @@ import static org.junit.Assert.*;
  * @author tuomoart
  */
 public class FractalTest {
-    Fractal fractal;
+    private Fractal fractal;
     
     public FractalTest() {
     }
@@ -36,10 +39,16 @@ public class FractalTest {
     }
     
     @Before
-    public void setUp() {
-        HistoryDao h = new SQLiteHistoryDao("fractaltest.db");
-        this.fractal = new Fractal(h);
-        this.fractal.setIterations(50);
+    public void setUp() throws Exception {
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileInputStream("config.properties"));
+            HistoryDao h = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
+            this.fractal = new Fractal(h, properties);
+            this.fractal.setIterations(50);
+        } catch (SQLException e) {
+            
+        }
     }
     
     @After

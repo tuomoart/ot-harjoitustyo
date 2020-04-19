@@ -2,32 +2,56 @@ package domain;
 
 import DAO.HistoryDao;
 import DAO.SQLiteHistoryDao;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class Fractal {
     private HistoryDao history;
+    private Properties properties;
     
-    private int width = 350;
-    private int height = 350;
+    private int width;
+    private int height;
     
-    private double x = 0;
-    private double y = 0;
-    private double areaWidth = 350;
-    private double areaHeight = 350;
+    private double x;
+    private double y;
+    private double areaWidth;
+    private double areaHeight;
 
-    private ComplexNumber c = new ComplexNumber(-0.223, 0.745);
+    private ComplexNumber c;
 
-    private boolean[][] values = null;
+    private boolean[][] values;
 
     private double minX = -1.5;
     private double maxX = 1.5;
     private double minY = -1.5;
     private double maxY = 1.5;
 
-    private double threshold = 1;
-    private int iterations = 50;
+    private double threshold;
+    private int iterations;
 
-    public Fractal(HistoryDao history) {
+    public Fractal(HistoryDao history, Properties properties) {
         this.history = history;
+        this.properties = properties;
+        
+        loadToDefaults();
+    }
+    
+    public void loadToDefaults() {
+        this.x = Double.valueOf(properties.getProperty("x"));
+        this.y = Double.valueOf(properties.getProperty("y"));
+        
+        int size = Integer.valueOf(properties.getProperty("drawAreaSize"));
+        this.width = size;
+        this.height = size;
+        this.areaWidth = (double) size;
+        this.areaHeight = (double) size;
+        
+        double real = Double.valueOf(properties.getProperty("real"));
+        double img = Double.valueOf(properties.getProperty("img"));
+        this.c = new ComplexNumber(real, img);
+        
+        this.threshold = Double.valueOf(properties.getProperty("threshold"));
+        this.iterations = Integer.valueOf(properties.getProperty("iterations"));
     }
     
     public int getIterations() {
@@ -48,6 +72,10 @@ public class Fractal {
     
     public double getImg() {
         return this.c.getImg();
+    }
+    
+    public int getWidth() {
+        return this.width;
     }
     
     public void setIterations(int iterations) {
@@ -78,18 +106,25 @@ public class Fractal {
     
     public void saveModifications() {
         String settings = iterations + "," + c.getReal() + "," + c.getImg();
-        this.history.saveModification(settings);
+        try {
+            this.history.saveModification(settings);
+        } catch (SQLException e) {
+            
+        }
+        
     }
     
     public boolean[][] undo() {
-        unpackSettings(history.undo());
+        try {
+            unpackSettings(history.undo());
         
-        getValues();
-        return this.values;
-    }
-    
-    public void getLatestSettings() {
-        unpackSettings(history.getLatest());
+            getValues();
+            return this.values;
+        } catch (SQLException e) {
+            //TODO make return default values
+            return null;
+        }
+        
     }
     
     public void unpackSettings(String settings) {

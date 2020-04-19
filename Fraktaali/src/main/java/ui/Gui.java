@@ -5,9 +5,13 @@ import DAO.SQLiteHistoryDao;
 import domain.Fractal;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Properties;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -35,19 +39,31 @@ public class Gui extends Application {
     private Slider zoomSlider;
     private Canvas drawing;
     private GraphicsContext drawer;
-    private int drawArea=500;
+    private int drawArea;
     private Fractal generator;
     private Stage window;
     
-    private double x0=0, y0=0, transX, transY;
+    private double x0, y0, transX, transY;
     private double zoom=1;
     
     private boolean[][] grid;
     
     @Override
     public void init() {
-        HistoryDao history = new SQLiteHistoryDao("history.db");
-        this.generator = new Fractal(history);
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileInputStream("config.properties"));
+            
+            HistoryDao history = new SQLiteHistoryDao(properties.getProperty("historyDatabase"));
+            
+            this.generator = new Fractal(history, properties);
+            this.drawArea = generator.getWidth();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to action history");
+        } catch (Exception ee) {
+            System.out.println(ee);
+            Platform.exit();
+        }
     }
     
     @Override
@@ -63,7 +79,7 @@ public class Gui extends Application {
         VBox leftSide = new VBox();
         layout.setLeft(leftSide);
         
-        //Status-label
+        //Status-label TODO Delete this
         this.status = new Label("");
         leftSide.getChildren().add(this.status);
         
@@ -91,7 +107,7 @@ public class Gui extends Application {
         //Label and slider for setting iterations
         this.iterationsLabel = new Label("Iterations: " + this.generator.getIterations());
         leftSide.getChildren().add(this.iterationsLabel);
-        this.iterationsSlider = new Slider(0,100,50);
+        this.iterationsSlider = new Slider(0,100,this.generator.getIterations());
         this.iterationsSlider.setShowTickLabels(true);
         this.iterationsSlider.setShowTickMarks(true);
         this.iterationsSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
@@ -124,6 +140,13 @@ public class Gui extends Application {
             undo();
         });
         
+        //Reset-button
+        Button resetButton = new Button("Reset");
+        leftSide.getChildren().add(resetButton);
+        resetButton.setOnAction((event) -> {
+            loadDefaults();
+        });
+        
         //Create the drawing area
         this.drawing = new Canvas(drawArea,drawArea);
         this.drawing.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -149,7 +172,7 @@ public class Gui extends Application {
         Scene scene = new Scene(layout);
         
         this.window.setScene(scene);
-        updateSettings();
+        loadDefaults();
         this.window.show();
     }
     
@@ -208,9 +231,7 @@ public class Gui extends Application {
         }
     }
     
-    public void undo() {
-        this.grid = generator.undo();
-        
+    public void updateSlidersAndTitles() {
         this.iterationsSlider.setValue(generator.getIterations());
         this.iterationsLabel.setText("Iterations: " + generator.getIterations());
         
@@ -220,6 +241,12 @@ public class Gui extends Application {
         String formattedImaginaryValue = String.format("%1.3f", generator.getImg());
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
+    }
+    
+    public void undo() {
+        this.grid = generator.undo();
+        
+        updateSlidersAndTitles();
         
         draw();
     }
@@ -246,6 +273,22 @@ public class Gui extends Application {
                 }
             }
         }
+    }
+    
+    public void loadDefaults() {
+        generator.loadToDefaults();
+        
+        this.x0 = generator.getX();
+        this.y0 = generator.getY();
+        
+        updateSlidersAndTitles();
+        
+        this.zoomSlider.setValue(1);
+        this.zoomLabel.setText("Magnification: 1.0");
+        
+        this.grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
+        
+        draw();
     }
     
     public void begin() {
