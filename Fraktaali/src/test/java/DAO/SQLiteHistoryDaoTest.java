@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import dao.SQLiteHistoryDao;
 import domain.Fractal;
 import java.io.FileInputStream;
 import java.sql.Connection;

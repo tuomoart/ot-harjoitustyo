@@ -5,8 +5,8 @@
  */
 package ui;
 
-import DAO.HistoryDao;
-import DAO.SQLiteHistoryDao;
+import dao.HistoryDao;
+import dao.SQLiteHistoryDao;
 import domain.Fractal;
 
 /**

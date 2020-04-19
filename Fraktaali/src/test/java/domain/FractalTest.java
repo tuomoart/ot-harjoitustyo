@@ -6,8 +6,8 @@ package domain;
  * and open the template in the editor.
  */
 
-import DAO.HistoryDao;
-import DAO.SQLiteHistoryDao;
+import dao.HistoryDao;
+import dao.SQLiteHistoryDao;
 import domain.Fractal;
 import java.io.FileInputStream;
 import java.sql.SQLException;

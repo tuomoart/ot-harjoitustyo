@@ -1,7 +1,7 @@
 package ui;
 
-import DAO.HistoryDao;
-import DAO.SQLiteHistoryDao;
+import dao.HistoryDao;
+import dao.SQLiteHistoryDao;
 import domain.Fractal;
 import java.awt.image.RenderedImage;
 import java.io.File;

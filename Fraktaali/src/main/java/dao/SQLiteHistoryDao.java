@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public class SQLiteHistoryDao implements HistoryDao {
     
     public SQLiteHistoryDao(String dbName) throws SQLException {
         
-        this.dbName=dbName;
+        this.dbName = dbName;
         
         createTables();
     }
@@ -30,7 +30,7 @@ public class SQLiteHistoryDao implements HistoryDao {
     public void saveModification(String settings) throws SQLException {
         try (Connection db = DriverManager.getConnection("jdbc:sqlite:" + this.dbName)) {
             PreparedStatement p = db.prepareStatement("INSERT INTO History (settings) VALUES (?);");
-            p.setString(1,settings);
+            p.setString(1, settings);
             p.executeUpdate();
         }
     }

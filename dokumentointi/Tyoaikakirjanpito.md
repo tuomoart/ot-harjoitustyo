@@ -8,4 +8,5 @@
 |29.3.      |6        |Perustoiminnallisuuden rakentamista, iteraatio-slider, zoomaus, testit täyteen kattavuuteen.|
 |30.3.      |2        |Pieniä korjailuja, etäkäytön testaamista, repositorion siistimistä|
 |6.4.       |3        |Lisätty ominaisuuksia ohjelmaan, checkstyle virheettömäksi|
-|Yhteensä:  |16.5     | |
+|19.4.      |4        |Undo- ja reset -ominaisuudet, konfiguraatiot tiedostoon|
+|Yhteensä:  |20.5     | |
