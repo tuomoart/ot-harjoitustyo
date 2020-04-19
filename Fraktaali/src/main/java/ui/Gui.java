@@ -1,5 +1,7 @@
 package ui;
 
+import DAO.HistoryDao;
+import DAO.SQLiteHistoryDao;
 import domain.Fractal;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -40,9 +42,16 @@ public class Gui extends Application {
     private double x0=0, y0=0, transX, transY;
     private double zoom=1;
     
+    private boolean[][] grid;
+    
+    @Override
+    public void init() {
+        HistoryDao history = new SQLiteHistoryDao("history.db");
+        this.generator = new Fractal(history);
+    }
+    
     @Override
     public void start(Stage window) {
-        this.generator=new Fractal();
         this.generator.setAreaWidth(drawArea);
         this.generator.setAreaHeight(drawArea);
         this.window=window;
@@ -108,6 +117,13 @@ public class Gui extends Application {
             saveButtonAction();
         });
         
+        //Undo-button
+        Button undoButton = new Button("Undo");
+        leftSide.getChildren().add(undoButton);
+        undoButton.setOnAction((event) -> {
+            undo();
+        });
+        
         //Create the drawing area
         this.drawing = new Canvas(drawArea,drawArea);
         this.drawing.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -124,7 +140,7 @@ public class Gui extends Application {
             public void handle(MouseEvent t) {
                 x0 = -t.getSceneX() + transX;
                 y0 = -t.getSceneY() + transY;
-                draw();
+                updateSettings();
             }
         });
         this.drawer = this.drawing.getGraphicsContext2D();
@@ -133,7 +149,7 @@ public class Gui extends Application {
         Scene scene = new Scene(layout);
         
         this.window.setScene(scene);
-        draw();
+        updateSettings();
         this.window.show();
     }
     
@@ -144,7 +160,7 @@ public class Gui extends Application {
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
         this.generator.setNumber(dvalue, this.generator.getImg());
-        draw();
+        updateSettings();
     }
     
     public void imaginarySliderChangeAction(Number value) {
@@ -154,14 +170,14 @@ public class Gui extends Application {
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
         this.generator.setNumber(this.generator.getReal(), dvalue);
-        draw();
+        updateSettings();
     }
     
     public void iterationsSliderChangeAction(Number value) {
         int intvalue = value.intValue();
         this.iterationsLabel.setText("Iterations: " + intvalue);
         this.generator.setIterations(intvalue);
-        draw();
+        updateSettings();
     }
     
     public void zoomSliderChangeAction(Number value) {
@@ -169,7 +185,7 @@ public class Gui extends Application {
         String text = String.format("Magnification: %1.1f", doubleValue);
         this.zoomLabel.setText(text + "x");
         this.zoom = doubleValue;
-        draw();
+        updateSettings();
     }
     
     public void saveButtonAction() {
@@ -187,20 +203,40 @@ public class Gui extends Application {
                 RenderedImage ri = SwingFXUtils.fromFXImage(wi,null);
                 ImageIO.write(ri, "png", f);
             } catch (IOException e) {
-                
+                //TODO create an error prompt
             }
         }
     }
     
-    public void draw() {
+    public void undo() {
+        this.grid = generator.undo();
+        
+        this.iterationsSlider.setValue(generator.getIterations());
+        this.iterationsLabel.setText("Iterations: " + generator.getIterations());
+        
+        this.realSlider.setValue(generator.getReal());
+        this.imaginarySlider.setValue(generator.getImg());
+        String formattedRealValue = String.format("%1.3f", generator.getReal());
+        String formattedImaginaryValue = String.format("%1.3f", generator.getImg());
+        this.numberLabel.setText("Imaginary number: " + formattedRealValue
+                + "+" + formattedImaginaryValue + "i");
+        
+        draw();
+    }
+    
+    public void updateSettings() {
         double temp = 1.0*drawArea/zoom;
         this.generator.setAreaHeight(1.0*temp);
         this.generator.setAreaWidth(1.0*temp);
         this.generator.setX(x0+1.0*drawArea/2-temp/2);
         this.generator.setY(y0+1.0*drawArea/2-temp/2);
 
-        boolean[][] grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
+        this.grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
         
+        draw();
+    }
+    
+    public void draw() {
         this.drawer.clearRect(0, 0, drawing.getWidth(), drawing.getHeight());
         
         for (int y=0;y<grid.length; y++) {

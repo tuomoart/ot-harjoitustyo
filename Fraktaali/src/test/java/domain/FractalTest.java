@@ -1,9 +1,13 @@
+package domain;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import DAO.HistoryDao;
+import DAO.SQLiteHistoryDao;
 import domain.Fractal;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -33,7 +37,8 @@ public class FractalTest {
     
     @Before
     public void setUp() {
-        this.fractal = new Fractal();
+        HistoryDao h = new SQLiteHistoryDao("fractaltest.db");
+        this.fractal = new Fractal(h);
         this.fractal.setIterations(50);
     }
     

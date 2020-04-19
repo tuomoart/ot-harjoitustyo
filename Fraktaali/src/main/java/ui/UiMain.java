@@ -5,6 +5,10 @@
  */
 package ui;
 
+import DAO.HistoryDao;
+import DAO.SQLiteHistoryDao;
+import domain.Fractal;
+
 /**
  *
  * @author tuomoart

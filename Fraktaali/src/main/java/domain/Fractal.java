@@ -1,8 +1,11 @@
 package domain;
 
-import java.util.Arrays;
+import DAO.HistoryDao;
+import DAO.SQLiteHistoryDao;
 
 public class Fractal {
+    private HistoryDao history;
+    
     private int width = 350;
     private int height = 350;
     
@@ -23,8 +26,8 @@ public class Fractal {
     private double threshold = 1;
     private int iterations = 50;
 
-    public Fractal() {
-
+    public Fractal(HistoryDao history) {
+        this.history = history;
     }
     
     public int getIterations() {
@@ -73,9 +76,35 @@ public class Fractal {
         this.c = new ComplexNumber(r, i);
     }
     
+    public void saveModifications() {
+        String settings = iterations + "," + c.getReal() + "," + c.getImg();
+        this.history.saveModification(settings);
+    }
+    
+    public boolean[][] undo() {
+        unpackSettings(history.undo());
+        
+        getValues();
+        return this.values;
+    }
+    
+    public void getLatestSettings() {
+        unpackSettings(history.getLatest());
+    }
+    
+    public void unpackSettings(String settings) {
+        String[] s = settings.split(",");
+        
+        iterations = Integer.valueOf(s[0]);
+        c = new ComplexNumber(Double.valueOf(s[1]), Double.valueOf(s[2]));
+    }
+    
     public boolean[][] generateJuliaSet(int w, int h) {
         this.width = w;
         this.height = h;
+        
+        saveModifications();
+        
         getValues();
         return this.values;
     }
