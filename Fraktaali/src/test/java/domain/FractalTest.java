@@ -26,6 +26,9 @@ import static org.junit.Assert.*;
  */
 public class FractalTest {
     private Fractal fractal;
+    private HistoryDao h;
+    
+    private int defaultIterations;
     
     public FractalTest() {
     }
@@ -43,9 +46,11 @@ public class FractalTest {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("config.properties"));
-            HistoryDao h = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
+            
+            defaultIterations = Integer.valueOf(properties.getProperty("iterations"));
+            
+            h = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
             this.fractal = new Fractal(h, properties);
-            this.fractal.setIterations(50);
         } catch (SQLException e) {
             
         }
@@ -132,5 +137,17 @@ public class FractalTest {
         
         assertEquals(correct, this.fractal.getWidth());
         
+    }
+    
+    @Test
+    public void undoResetsToDefaultsWhenNoHistory() throws SQLException {
+        this.h.empty();
+        
+        this.fractal.setIterations(3);
+        
+        this.fractal.undo();
+        
+        assertEquals(defaultIterations, this.fractal.getIterations());
+        //TODO ensure all parameters, not just this one
     }
 }

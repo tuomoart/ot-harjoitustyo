@@ -17,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -227,6 +229,10 @@ public class Gui extends Application {
                 ImageIO.write(ri, "png", f);
             } catch (IOException e) {
                 //TODO create an error prompt
+                Alert error = new Alert(AlertType.ERROR);
+                error.setTitle("Error");
+                error.setHeaderText("Error while saving file, please try again");
+                error.showAndWait();
             }
         }
     }

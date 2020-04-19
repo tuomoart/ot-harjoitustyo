@@ -50,6 +50,15 @@ public class SQLiteHistoryDao implements HistoryDao {
         return response;
     }
     
+    @Override
+    public void empty() throws SQLException {
+        try (Connection db = DriverManager.getConnection("jdbc:sqlite:" + this.dbName)) {
+            Statement s = db.createStatement();
+            
+            s.execute("DELETE FROM History;");
+        }
+    }
+    
     private void removeLastFromHistory() throws SQLException {
         try (Connection db = DriverManager.getConnection("jdbc:sqlite:" + this.dbName)) {
             PreparedStatement p = db.prepareStatement("DELETE FROM History WHERE id=(SELECT id FROM History ORDER BY id DESC LIMIT 1)");

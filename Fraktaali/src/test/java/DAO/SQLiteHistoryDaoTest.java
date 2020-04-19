@@ -92,5 +92,19 @@ public class SQLiteHistoryDaoTest {
         assertEquals(0.5,f.getImg(),0.0001);
     }
     
+    @Test
+    public void emptyWorks() throws SQLException {
+        this.dao.saveModification("1");
+        this.dao.saveModification("1");
+        this.dao.empty();
+        
+        try {
+            this.dao.undo();
+            fail("Should throw an exception");
+        } catch (SQLException e) {
+            
+        }
+    }
+    
 
 }
