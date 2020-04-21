@@ -19,10 +19,12 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 
 
 ## Komentorivitoiminnot
-### Testaus
 
 Sovelluksen voi suorittaa komennolla
 `mvn compile exec:java -Dexec.mainClass=fractal.Main`
+
+
+### Testaus
 
 Testaus suoritetaan komennolla
 `mvn test`
