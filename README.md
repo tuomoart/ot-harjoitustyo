@@ -13,6 +13,11 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 [Työaikakirjanpito](https://github.com/tuomoart/ot-harjoitustyo/blob/master/dokumentointi/Tyoaikakirjanpito.md)
 
 
+## Releaset
+
+[Viikko5](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko5)
+
+
 ## Komentorivitoiminnot
 ### Testaus
 
