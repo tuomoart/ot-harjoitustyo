@@ -209,7 +209,7 @@ public class Gui extends Application {
         String formattedImaginaryValue = String.format("%1.3f", this.generator.getImg());
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
-        //TODO save img-part to variable to not have to get it again
+        //TODO change so that Fractal does the below action:
         this.generator.setNumber(dvalue, this.generator.getImg());
         updateSettings();
     }
@@ -220,7 +220,7 @@ public class Gui extends Application {
         String formattedImaginaryValue = String.format("%1.3f", dvalue);
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
-        //TODO save real-part to variable to not have to get it again
+        //TODO change so that Fractal does the below action:
         this.generator.setNumber(this.generator.getReal(), dvalue);
         updateSettings();
     }
