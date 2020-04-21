@@ -15,7 +15,7 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 
 ## Releaset
 
-[Viikko5](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko5)
+[Viikko 5](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko5)
 
 
 ## Komentorivitoiminnot
