@@ -72,18 +72,18 @@ public class SQLiteHistoryDaoTest {
     }
     
     @Test
-    public void undoFromFractalWorks() {
+    public void undoFromFractalWorks() throws Exception {
         Fractal f = new Fractal(this.dao, properties);
         
         f.setIterations(35);
         f.setNumber(0.3,0.5);
         
-        f.generateJuliaSet(10, 10);
+        f.saveModifications();
         
         f.setIterations(100);
         f.setNumber(1,1);
         
-        f.generateJuliaSet(10, 10);
+        f.saveModifications();
         
         f.undo();
         
@@ -105,6 +105,4 @@ public class SQLiteHistoryDaoTest {
             
         }
     }
-    
-
 }

@@ -39,6 +39,7 @@ public class Gui extends Application {
     private Slider iterationsSlider;
     private Label zoomLabel;
     private Slider zoomSlider;
+    private Button undoButton;
     private Canvas drawing;
     private GraphicsContext drawer;
     private int drawArea;
@@ -50,6 +51,8 @@ public class Gui extends Application {
     
     private boolean[][] grid;
     
+    private boolean historyWorks = true;
+    
     @Override
     public void init() {
         try {
@@ -59,6 +62,7 @@ public class Gui extends Application {
             HistoryDao history = new SQLiteHistoryDao(properties.getProperty("historyDatabase"));
             
             this.generator = new Fractal(history, properties);
+            this.generator.loadToDefaults();
             this.drawArea = generator.getWidth();
         } catch (SQLException e) {
             System.out.println("Error connecting to action history");
@@ -96,6 +100,9 @@ public class Gui extends Application {
         this.realSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
             realSliderChangeAction(new_val);
         });
+        this.realSlider.setOnMouseClicked((event) -> {
+            undoableChangeAction();
+        });
         leftSide.getChildren().add(this.realSlider);
         this.imaginarySlider = new Slider(-1,1,this.generator.getImg());
         this.imaginarySlider.setMajorTickUnit(1);
@@ -103,6 +110,9 @@ public class Gui extends Application {
         this.imaginarySlider.setShowTickMarks(true);
         this.imaginarySlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
             imaginarySliderChangeAction(new_val);
+        });
+        this.imaginarySlider.setOnMouseClicked((event) -> {
+            undoableChangeAction();
         });
         leftSide.getChildren().add(this.imaginarySlider);
         
@@ -114,6 +124,9 @@ public class Gui extends Application {
         this.iterationsSlider.setShowTickMarks(true);
         this.iterationsSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
             iterationsSliderChangeAction(new_val);
+        });
+        this.iterationsSlider.setOnMouseClicked((event) -> {
+            undoableChangeAction();
         });
         leftSide.getChildren().add(this.iterationsSlider);
         
@@ -136,7 +149,7 @@ public class Gui extends Application {
         });
         
         //Undo-button
-        Button undoButton = new Button("Undo");
+        undoButton = new Button("Undo");
         leftSide.getChildren().add(undoButton);
         undoButton.setOnAction((event) -> {
             undo();
@@ -176,6 +189,18 @@ public class Gui extends Application {
         this.window.setScene(scene);
         loadDefaults();
         this.window.show();
+    }
+    
+    public void undoableChangeAction() {
+        try {
+            this.generator.saveModifications();
+        } catch (Exception e) {
+            if (historyWorks) {
+                historyWorks = false;
+                showError("Modification history has stopped working. You can still continue using the program.");
+                undoButton.setDisable(true);
+            }
+        }
     }
     
     public void realSliderChangeAction(Number value) {
@@ -228,13 +253,16 @@ public class Gui extends Application {
                 RenderedImage ri = SwingFXUtils.fromFXImage(wi,null);
                 ImageIO.write(ri, "png", f);
             } catch (IOException e) {
-                //TODO create an error prompt
-                Alert error = new Alert(AlertType.ERROR);
-                error.setTitle("Error");
-                error.setHeaderText("Error while saving file, please try again");
-                error.showAndWait();
+                showError("Error while saving file, please try again");
             }
         }
+    }
+    
+    public void showError(String msg) {
+        Alert error = new Alert(AlertType.ERROR);
+                error.setTitle("Error");
+                error.setHeaderText(msg);
+                error.showAndWait();
     }
     
     public void updateSlidersAndTitles() {
@@ -251,6 +279,11 @@ public class Gui extends Application {
     
     public void undo() {
         this.grid = generator.undo();
+        
+        if (this.grid == null) {
+            showError("Unknown error. The program will now close.");
+            Platform.exit();
+        }
         
         updateSlidersAndTitles();
         
@@ -282,7 +315,15 @@ public class Gui extends Application {
     }
     
     public void loadDefaults() {
-        generator.loadToDefaults();
+        try {
+            generator.loadToDefaults();
+        } catch (Exception e) {
+            if (historyWorks) {
+                historyWorks = false;
+                showError("Modification history has stopped working. You can still continue using the program.");
+                undoButton.setDisable(true);
+            }
+        }
         
         this.x0 = generator.getX();
         this.y0 = generator.getY();

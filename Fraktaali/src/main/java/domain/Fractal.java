@@ -32,11 +32,9 @@ public class Fractal {
     public Fractal(HistoryDao history, Properties properties) {
         this.history = history;
         this.properties = properties;
-        
-        loadToDefaults();
     }
     
-    public void loadToDefaults() {
+    public void loadToDefaults() throws Exception {
         this.x = Double.valueOf(properties.getProperty("x"));
         this.y = Double.valueOf(properties.getProperty("y"));
         
@@ -52,6 +50,9 @@ public class Fractal {
         
         this.threshold = Double.valueOf(properties.getProperty("threshold"));
         this.iterations = Integer.valueOf(properties.getProperty("iterations"));
+        
+        this.history.empty();
+        saveModifications();
     }
     
     public int getIterations() {
@@ -104,21 +105,19 @@ public class Fractal {
         this.c = new ComplexNumber(r, i);
     }
     
-    public void saveModifications() {
+    public void saveModifications() throws Exception {
         String settings = iterations + "," + c.getReal() + "," + c.getImg();
-        try {
-            this.history.saveModification(settings);
-        } catch (SQLException e) {
-            
-        }
         
+        this.history.saveModification(settings);
     }
     
     public boolean[][] undo() {
         try {
             unpackSettings(history.undo());
         } catch (SQLException e) {
-            loadToDefaults();
+            try {
+                loadToDefaults();
+            } catch (Exception ee) {return null;}
         }
         getValues();
         return this.values;
@@ -134,8 +133,6 @@ public class Fractal {
     public boolean[][] generateJuliaSet(int w, int h) {
         this.width = w;
         this.height = h;
-        
-        saveModifications();
         
         getValues();
         return this.values;

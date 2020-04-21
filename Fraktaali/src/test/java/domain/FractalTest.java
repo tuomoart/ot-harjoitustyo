@@ -10,6 +10,9 @@ import dao.HistoryDao;
 import dao.SQLiteHistoryDao;
 import domain.Fractal;
 import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 import org.junit.After;
@@ -52,6 +55,7 @@ public class FractalTest {
             
             h = new SQLiteHistoryDao(prop.getProperty("testHistoryDatabase"));
             this.fractal = new Fractal(h, prop);
+            this.fractal.loadToDefaults();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -76,11 +80,6 @@ public class FractalTest {
         boolean[][] returned = fractal.generateJuliaSet(7, 7);
         
         assertArrayEquals(correct,returned);
-    }
-    
-    @Test
-    public void isInSetIsCorrectWhenIsInSet() {
-        
     }
     
     @Test
