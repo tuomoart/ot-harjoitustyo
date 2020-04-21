@@ -25,5 +25,5 @@ Jos ja kun aikaa jää, voisi sovellukseen lisätä seuraavia toimintoja:
 - Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan (tehty)
 - Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan (tehty)
 - Reset-nappi (tehty)
-- Undo-nappi (keskeneräinen)
+- Undo-nappi (tehty)
 - Eri tyyppisten fraktaalien muodostaminen, kuten Mandelbrot
