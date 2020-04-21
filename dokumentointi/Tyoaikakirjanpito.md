@@ -9,4 +9,5 @@
 |30.3.      |2        |Pieniä korjailuja, etäkäytön testaamista, repositorion siistimistä|
 |6.4.       |3        |Lisätty ominaisuuksia ohjelmaan, checkstyle virheettömäksi|
 |19.4.      |5        |Undo- ja reset -ominaisuudet, konfiguraatiot tiedostoon|
-|Yhteensä:  |21.5     | |
+|21.4.      |4        |Undo-ominaisuuden parantelua, testejä ja virheenkäsittelyä paremmaksi. Dokumentaation päivitys ja kaavioiden piirtely|
+|Yhteensä:  |25.5     | |
