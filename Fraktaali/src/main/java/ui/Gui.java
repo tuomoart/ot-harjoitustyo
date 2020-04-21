@@ -5,7 +5,6 @@ import dao.SQLiteHistoryDao;
 import domain.Fractal;
 import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
