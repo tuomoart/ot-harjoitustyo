@@ -117,7 +117,9 @@ public class Fractal {
         } catch (SQLException e) {
             try {
                 loadToDefaults();
-            } catch (Exception ee) {return null;}
+            } catch (Exception ee) {
+                return null;
+            }
         }
         getValues();
         return this.values;
