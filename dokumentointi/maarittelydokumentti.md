@@ -6,7 +6,7 @@ Sovelluksella on mahdollista muodostaa julia-joukon fraktaaleja ja tarkastella n
 
 ## Käyttöliittymäluonnos
 
-Sovellus koostuu yhdestä näkymästä
+Sovellus koostuu yhdestä näkymästä, mutta se käyttää myös käyttöjärjestelmän tiedostonvalitsinta.
 
 
 ## Perusversion tarjoama toiminnallisuus
@@ -24,5 +24,6 @@ Jos ja kun aikaa jää, voisi sovellukseen lisätä seuraavia toimintoja:
 - Piirtoalan zoomaaminen (tehty)
 - Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan (tehty)
 - Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan (tehty)
-- Reset-nappi
+- Reset-nappi (tehty)
+- Undo-nappi (keskeneräinen)
 - Eri tyyppisten fraktaalien muodostaminen, kuten Mandelbrot
