@@ -29,6 +29,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>Fractalgenerator</finalName>
         <testResources>
             <testResource>
                 <directory>${project.basedir}/src/test/resources</directory>
