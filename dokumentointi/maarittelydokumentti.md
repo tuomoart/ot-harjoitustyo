@@ -26,4 +26,4 @@ Jos ja kun aikaa jää, voisi sovellukseen lisätä seuraavia toimintoja:
 - Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan (tehty)
 - Reset-nappi (tehty)
 - Undo-nappi (tehty)
-- Eri tyyppisten fraktaalien muodostaminen, kuten Mandelbrot
+- Piirtoalan siirtelyä pitäisi parantaa, nyt on liian hidas ja epävarma

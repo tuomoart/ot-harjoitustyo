@@ -21,7 +21,7 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 ## Komentorivitoiminnot
 
 Sovelluksen voi suorittaa komennolla
-`mvn compile exec:java -Dexec.mainClass=fractal.Main`
+`mvn compile exec:java -Dexec.mainClass=ui.UiMain`
 
 
 ### Testaus
