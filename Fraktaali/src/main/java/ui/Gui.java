@@ -331,7 +331,7 @@ public class Gui extends Application {
         updateSlidersAndTitles();
         
         this.zoomSlider.setValue(1);
-        this.zoomLabel.setText("Magnification: 1.0");
+        this.zoomLabel.setText("Magnification: 1.0x");
         
         this.grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
         
