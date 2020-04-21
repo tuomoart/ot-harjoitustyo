@@ -43,7 +43,7 @@ public class SQLiteHistoryDaoTest {
     public void setUp() throws Exception {
         try {
             this.properties = new Properties();
-            properties.load(new FileInputStream("config.properties"));
+            properties.load(this.getClass().getResourceAsStream("/testConfig.properties"));
             this.dao = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
         } catch (SQLException e) {
             
@@ -57,7 +57,7 @@ public class SQLiteHistoryDaoTest {
     @Test
     public void constructorTest() {
         try {
-            SQLiteHistoryDao testDao = new SQLiteHistoryDao("test.db");
+            SQLiteHistoryDao testDao = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
         } catch (SQLException e) {
             fail("Constructor threw an exception");
         }

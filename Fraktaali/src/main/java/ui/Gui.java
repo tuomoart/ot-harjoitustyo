@@ -54,7 +54,7 @@ public class Gui extends Application {
     public void init() {
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream("config.properties"));
+            properties.load(this.getClass().getResourceAsStream("/config.properties"));
             
             HistoryDao history = new SQLiteHistoryDao(properties.getProperty("historyDatabase"));
             

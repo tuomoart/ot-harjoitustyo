@@ -27,6 +27,7 @@ import static org.junit.Assert.*;
 public class FractalTest {
     private Fractal fractal;
     private HistoryDao h;
+    private Properties prop;
     
     private int defaultIterations;
     
@@ -44,15 +45,15 @@ public class FractalTest {
     @Before
     public void setUp() throws Exception {
         try {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream("config.properties"));
+            prop = new Properties();
+            prop.load(this.getClass().getResourceAsStream("/testConfig.properties"));
             
-            defaultIterations = Integer.valueOf(properties.getProperty("iterations"));
+            defaultIterations = Integer.valueOf(prop.getProperty("iterations"));
             
-            h = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
-            this.fractal = new Fractal(h, properties);
+            h = new SQLiteHistoryDao(prop.getProperty("testHistoryDatabase"));
+            this.fractal = new Fractal(h, prop);
         } catch (SQLException e) {
-            
+            System.out.println(e);
         }
     }
     
@@ -131,12 +132,9 @@ public class FractalTest {
     
     @Test
     public void getWidthWorks() throws Exception {
-        Properties properties = new Properties();
-        properties.load(new FileInputStream("config.properties"));
-        int correct = Integer.valueOf(properties.getProperty("drawAreaSize"));
+        int correct = Integer.valueOf(prop.getProperty("drawAreaSize"));
         
         assertEquals(correct, this.fractal.getWidth());
-        
     }
     
     @Test
