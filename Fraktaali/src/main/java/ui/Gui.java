@@ -30,7 +30,6 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class Gui extends Application {
-    private Label status;
     private Label numberLabel;
     private Slider realSlider;
     private Slider imaginarySlider;
@@ -64,11 +63,10 @@ public class Gui extends Application {
             this.generator.loadToDefaults();
             this.drawArea = generator.getWidth();
         } catch (SQLException e) {
-            //TODO change to error prompt
-            System.out.println("Error connecting to action history");
+            showError("Could not connect to the action history. Program will be shut down.");
+            Platform.exit();
         } catch (Exception ee) {
-            //TODO change to error prompt
-            System.out.println(ee);
+            showError("Unknown error occurred. Program will be shut down.");
             Platform.exit();
         }
     }
@@ -85,10 +83,6 @@ public class Gui extends Application {
         BorderPane layout = new BorderPane();
         VBox leftSide = new VBox();
         layout.setLeft(leftSide);
-        
-        //Status-label TODO Delete this
-        this.status = new Label("");
-        leftSide.getChildren().add(this.status);
         
         //Label and sliders for selecting the imaginary number to base the Julia set off of
         this.numberLabel = new Label("Imaginary number: " + this.generator.getReal()
@@ -210,7 +204,6 @@ public class Gui extends Application {
         String formattedImaginaryValue = String.format("%1.3f", this.generator.getImg());
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
-        //TODO change so that Fractal does the below action:
         this.generator.setNumber(dvalue, this.generator.getImg());
         updateSettings();
     }
@@ -221,7 +214,6 @@ public class Gui extends Application {
         String formattedImaginaryValue = String.format("%1.3f", dvalue);
         this.numberLabel.setText("Imaginary number: " + formattedRealValue
                 + "+" + formattedImaginaryValue + "i");
-        //TODO change so that Fractal does the below action:
         this.generator.setNumber(this.generator.getReal(), dvalue);
         updateSettings();
     }
