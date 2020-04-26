@@ -64,8 +64,10 @@ public class Gui extends Application {
             this.generator.loadToDefaults();
             this.drawArea = generator.getWidth();
         } catch (SQLException e) {
+            //TODO change to error prompt
             System.out.println("Error connecting to action history");
         } catch (Exception ee) {
+            //TODO change to error prompt
             System.out.println(ee);
             Platform.exit();
         }
@@ -292,11 +294,11 @@ public class Gui extends Application {
     }
     
     public void updateSettings() {
-        double temp = 1.0*drawArea/zoom;
-        this.generator.setAreaHeight(1.0*temp);
-        this.generator.setAreaWidth(1.0*temp);
-        this.generator.setX(x0+1.0*drawArea/2-temp/2);
-        this.generator.setY(y0+1.0*drawArea/2-temp/2);
+        double temp = 1.0 * drawArea/zoom;
+        this.generator.setAreaHeight(1.0 * temp);
+        this.generator.setAreaWidth(1.0 * temp);
+        this.generator.setX(x0 + 1.0 * drawArea / 2 - temp / 2);
+        this.generator.setY(y0 + 1.0 * drawArea / 2 - temp / 2);
 
         this.grid = this.generator.generateJuliaSet(this.drawArea, this.drawArea);
         

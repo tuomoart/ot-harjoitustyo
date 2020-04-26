@@ -1,7 +1,6 @@
 package domain;
 
 import dao.HistoryDao;
-import dao.SQLiteHistoryDao;
 import java.sql.SQLException;
 import java.util.Properties;
 
