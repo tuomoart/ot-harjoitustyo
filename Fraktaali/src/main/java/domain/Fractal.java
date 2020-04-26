@@ -25,10 +25,10 @@ public class Fractal {
 
     private boolean[][] values;
 
-    private double minX = -1.5;
-    private double maxX = 1.5;
-    private double minY = -1.5;
-    private double maxY = 1.5;
+    final double minX = -1.5;
+    final double maxX = 1.5;
+    final double minY = -1.5;
+    final double maxY = 1.5;
 
     private double threshold;
     private int iterations;
@@ -188,9 +188,9 @@ public class Fractal {
     private void getValues() {
         values = new boolean[width][height];
         for (int i = 0; i < width; i++) {
-            double it = 1.0 * y + 1.0 * i * areaWidth / width;
+            double it = (double) y + (double) i * areaWidth / width;
             for (int j = 0; j < height; j++) {
-                double jt = 1.0 * x + 1.0 * j * areaHeight / height;
+                double jt = (double) x + (double) j * areaHeight / height;
                 double a = it * (maxX - minX) / (double) width + minX;
                 double b = jt * (maxY - minY) / (double) height + minY;
                 values[i][j] = isInSet(new ComplexNumber(a, b));
