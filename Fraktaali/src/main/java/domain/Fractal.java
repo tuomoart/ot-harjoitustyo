@@ -4,9 +4,14 @@ import dao.HistoryDao;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Class for creating Julia-fractals
+ * 
+ * @author tuomoart
+ */
 public class Fractal {
-    private HistoryDao history;
-    private Properties properties;
+    final HistoryDao history;
+    final Properties properties;
     
     private int width;
     private int height;
@@ -28,11 +33,21 @@ public class Fractal {
     private double threshold;
     private int iterations;
 
+    /**
+     * 
+     * @param history DAO managing event history
+     * @param properties Properties-object for default settings
+     */
     public Fractal(HistoryDao history, Properties properties) {
         this.history = history;
         this.properties = properties;
     }
     
+    /**
+     * Method for resetting all parameters back to default settings
+     * 
+     * @throws Exception 
+     */
     public void loadToDefaults() throws Exception {
         this.x = Double.valueOf(properties.getProperty("x"));
         this.y = Double.valueOf(properties.getProperty("y"));
@@ -78,6 +93,12 @@ public class Fractal {
         return this.width;
     }
     
+    /**
+     * Method for setting the number of iterations
+     * Only values greater than 0 will be accepted
+     * 
+     * @param iterations 
+     */
     public void setIterations(int iterations) {
         if (iterations > 0) {
             this.iterations = iterations;
@@ -100,16 +121,33 @@ public class Fractal {
         this.areaHeight = areaHeight;
     }
     
+    /**
+     * Method for setting a new base complex number
+     * 
+     * @param r
+     * @param i 
+     */
     public void setNumber(double r, double i) {
         this.c = new ComplexNumber(r, i);
     }
     
+    /**
+     * Method for saving new event to history
+     * Creates events for undo
+     * 
+     * @throws Exception 
+     */
     public void saveModifications() throws Exception {
         String settings = iterations + "," + c.getReal() + "," + c.getImg();
         
         this.history.saveModification(settings);
     }
     
+    /**
+     * Loads previous settings or loads defaults if there aren't any
+     * 
+     * @return 
+     */
     public boolean[][] undo() {
         try {
             unpackSettings(history.undo());
@@ -124,14 +162,22 @@ public class Fractal {
         return this.values;
     }
     
-    public void unpackSettings(String settings) {
+    private void unpackSettings(String settings) {
         String[] s = settings.split(",");
         
         iterations = Integer.valueOf(s[0]);
         c = new ComplexNumber(Double.valueOf(s[1]), Double.valueOf(s[2]));
     }
     
+    /**
+     * Method for getting values representing the Julia set
+     * 
+     * @param w width of the area
+     * @param h height of the area
+     * @return Boolean table where true if belongs to the set
+     */
     public boolean[][] generateJuliaSet(int w, int h) {
+        //TODO check if the parameters are still necessary
         this.width = w;
         this.height = h;
         
