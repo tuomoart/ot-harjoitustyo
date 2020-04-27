@@ -25,10 +25,10 @@ public class Fractal {
 
     private boolean[][] values;
 
-    final double minX = -1.5;
-    final double maxX = 1.5;
-    final double minY = -1.5;
-    final double maxY = 1.5;
+    private final double minX;
+    private final double maxX;
+    private final double minY;
+    private final double maxY;
 
     private double threshold;
     private int iterations;
@@ -39,6 +39,10 @@ public class Fractal {
      * @param properties Properties-object for default settings
      */
     public Fractal(HistoryDao history, Properties properties) {
+        this.minX = -1.5;
+        this.maxX = 1.5;
+        this.minY = -1.5;
+        this.maxY = 1.5;
         this.history = history;
         this.properties = properties;
     }
