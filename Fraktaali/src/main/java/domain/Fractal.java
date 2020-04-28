@@ -49,7 +49,6 @@ public class Fractal {
     
     /**
      * Method for resetting all parameters back to default settings
-     * 
      * @throws Exception 
      */
     public void loadToDefaults() throws Exception {
@@ -98,8 +97,7 @@ public class Fractal {
     }
     
     /**
-     * Method for setting the number of iterations
-     * Only values greater than 0 will be accepted
+     * Method for setting the number of iterations. Only values greater than 0 will be accepted
      * 
      * @param iterations 
      */
@@ -136,8 +134,7 @@ public class Fractal {
     }
     
     /**
-     * Method for saving new event to history
-     * Creates events for undo
+     * Method for saving new event to history. Creates events for undo
      * 
      * @throws Exception 
      */
@@ -148,7 +145,7 @@ public class Fractal {
     }
     
     /**
-     * Loads previous settings or loads defaults if there aren't any
+     * Loads previous settings or loads defaults if there are no previous
      * 
      * @return 
      */
@@ -178,7 +175,7 @@ public class Fractal {
      * 
      * @param w width of the area
      * @param h height of the area
-     * @return Boolean table where true if belongs to the set
+     * @return Boolean table where values are true if pixel belongs to the set
      */
     public boolean[][] generateJuliaSet(int w, int h) {
         //TODO check if the parameters are still necessary

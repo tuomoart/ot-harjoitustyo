@@ -29,6 +29,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
+/**
+ * Creates a JavaFX UI for the fractal generator. 
+ * @author tuomoart
+ */
 public class Gui extends Application {
     private Label numberLabel;
     private Slider realSlider;
@@ -51,6 +55,9 @@ public class Gui extends Application {
     
     private boolean historyWorks = true;
     
+    /**
+     * Initial set up, preparing helper classes. 
+     */
     @Override
     public void init() {
         try {
@@ -71,6 +78,10 @@ public class Gui extends Application {
         }
     }
     
+    /**
+     * Constructs the UI and shows it to the user. 
+     * @param window 
+     */
     @Override
     public void start(Stage window) {
         this.generator.setAreaWidth(drawArea);
@@ -186,6 +197,9 @@ public class Gui extends Application {
         this.window.show();
     }
     
+    /**
+     * Event handler method for events that can be undone.
+     */
     public void undoableChangeAction() {
         try {
             this.generator.saveModifications();
@@ -198,6 +212,10 @@ public class Gui extends Application {
         }
     }
     
+    /**
+     * Event handler method for changes to the slider controlling the real component.
+     * @param value 
+     */
     public void realSliderChangeAction(Number value) {
         double dvalue = value.doubleValue();
         String formattedRealValue = String.format("%1.3f", dvalue);
@@ -208,6 +226,10 @@ public class Gui extends Application {
         updateSettings();
     }
     
+    /**
+     * Event handler method for changes to the slider controlling the imaginary component.
+     * @param value 
+     */
     public void imaginarySliderChangeAction(Number value) {
         double dvalue = value.doubleValue();
         String formattedRealValue = String.format("%1.3f", this.generator.getReal());
@@ -218,13 +240,20 @@ public class Gui extends Application {
         updateSettings();
     }
     
+    /**
+     * Event handler method for changes to the slider controlling the number of iterations.
+     * @param value 
+     */
     public void iterationsSliderChangeAction(Number value) {
         int intvalue = value.intValue();
         this.iterationsLabel.setText("Iterations: " + intvalue);
         this.generator.setIterations(intvalue);
         updateSettings();
     }
-    
+    /**
+     * Event handler method for changes to the slider controlling the zoom level.
+     * @param value 
+     */
     public void zoomSliderChangeAction(Number value) {
         double doubleValue = value.doubleValue();
         String text = String.format("Magnification: %1.1f", doubleValue);
@@ -233,6 +262,9 @@ public class Gui extends Application {
         updateSettings();
     }
     
+    /**
+     * Event handler method for the save button.
+     */
     public void saveButtonAction() {
         FileChooser fileChooser = new FileChooser();
         
@@ -253,6 +285,10 @@ public class Gui extends Application {
         }
     }
     
+    /**
+     * Creates an error prompt and shows it. Waits for users response before continuing.
+     * @param msg Message to be displayed in the prompt
+     */
     public void showError(String msg) {
         Alert error = new Alert(AlertType.ERROR);
                 error.setTitle("Error");
@@ -260,6 +296,9 @@ public class Gui extends Application {
                 error.showAndWait();
     }
     
+    /**
+     * Updates the slider settings and related titles.
+     */
     public void updateSlidersAndTitles() {
         this.iterationsSlider.setValue(generator.getIterations());
         this.iterationsLabel.setText("Iterations: " + generator.getIterations());
@@ -272,6 +311,9 @@ public class Gui extends Application {
                 + "+" + formattedImaginaryValue + "i");
     }
     
+    /**
+     * Undoes the latest change made. Only applicable to imaginary number components and number of iterations.
+     */
     public void undo() {
         this.grid = generator.undo();
         
@@ -285,6 +327,9 @@ public class Gui extends Application {
         draw();
     }
     
+    /**
+     * Sends the current parameters to the generator object and draws the updated image. 
+     */
     public void updateSettings() {
         double temp = 1.0 * drawArea/zoom;
         this.generator.setAreaHeight(1.0 * temp);
@@ -297,6 +342,9 @@ public class Gui extends Application {
         draw();
     }
     
+    /**
+     * Re-renders the image. Does not re-draw, only re-renders from local parameters.
+     */
     public void draw() {
         this.drawer.clearRect(0, 0, drawing.getWidth(), drawing.getHeight());
         
@@ -309,6 +357,9 @@ public class Gui extends Application {
         }
     }
     
+    /**
+     * Resets all parameters back to default settings. Default settings are fetched from the generator object.
+     */
     public void loadDefaults() {
         try {
             generator.loadToDefaults();
@@ -333,6 +384,9 @@ public class Gui extends Application {
         draw();
     }
     
+    /**
+     * JavaFX-method for starting the UI.
+     */
     public void begin() {
         launch(Gui.class);
     }
