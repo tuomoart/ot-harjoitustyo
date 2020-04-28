@@ -16,6 +16,7 @@ Sovelluksen avulla on mahdollista luoda ja tarkastella Julia-fraktaaleja. Frakta
 ## Releaset
 
 [Viikko 5](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko5)
+
 [Viikko 6](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko6)
 
 
