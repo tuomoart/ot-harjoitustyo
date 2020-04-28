@@ -12,4 +12,5 @@
 |21.4.      |5        |Undo-ominaisuuden parantelua, testejä ja virheenkäsittelyä paremmaksi. Dokumentaation päivitys ja kaavioiden piirtely|
 |26.4.      |2        |Siivousta ja Javadoc:n kirjoitus|
 |27.4.      |2        |Arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen|
-|Yhteensä:  |30.5     | |
+|28.4.      |1        |JavaDoc loppuun ja dokumentaation parantelua|
+|Yhteensä:  |31.5     | |
