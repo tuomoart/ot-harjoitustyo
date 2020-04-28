@@ -35,14 +35,14 @@ Muutoshistoriaa käytetään dao.HistoryDao-rajapinnan avulla. Tässä ohjelmass
 
 ### Konfiguraatiot
 
-Ohjelman oletusasetukset on talletettu konfiguraatiotiedostoon resources.config.properties. Tätä käytetään Javan Properties-olion avulla. Konfiguraatiotiedosto ei ole tarkoitettu käyttäjän muokattavaksi, joten se on sijoitettu sisäänrakennetuksi resurssiksi. Näin ohjelman käyttöönotto saadaan käyttäjälle mutkattomaksi. Ohjelmaan voisi tehdä toiminnallisuuden, jolla oletusasetuksia on mahdollistsa muuttaa.
+Ohjelman oletusasetukset on talletettu konfiguraatiotiedostoon resources.config.properties. Tätä käytetään Javan Properties-olion avulla. Konfiguraatiotiedosto ei ole tarkoitettu käyttäjän muokattavaksi, joten se on sijoitettu sisäänrakennetuksi resurssiksi. Näin ohjelman käyttöönotto saadaan käyttäjälle mutkattomaksi. Ohjelmaan voisi tehdä toiminnallisuuden, jolla oletusasetuksia on mahdollista muuttaa.
 
 
 ## Päätoiminnallisuudet
 
 Ohjelman päätoiminnallisuuksia ovat erilaisten parametrien muutosten aiheuttamat uudelleenpiirrot. Kaikkien parametrien osalta toimintalogiikka on melko samanlaista. Niiden parametrien, joiden muutoksia on mahdollista peruuttaa, toimintaan liittyy myös uuden muutoksen tallettaminen muutoshistoriaan. Muutoksen tallettamispäätös on jätetty käyttöliittymän tehtäväksi, sillä sovelluslogiikan on hankala tunnistaa, mistä muutoksista pitäisi tallettaa uusi muutos. Esimerkiksi liukusäädintä siirrettäessä jokaista siirron aikaista välipiirtoa ei haluttane tallettaa muutoshistoriaan, vaan sen sijaan mielekäs on ainoastaan siirron päätearvo.
 
-Sekvenssikaaviossa on kuvattuna, mitä tapahtuu kun käyttäjä liikuttaa imaginääriluvun reaaliosaa muuttavaa liukusäädintä. Muiden parametrien muutokset toimivat vastaavasti, mutta osassa ei ole lopun muutoshistorian päivitystä:
+Sekvenssikaaviossa on kuvattuna, mitä tapahtuu kun käyttäjä liikuttaa imaginääriluvun reaaliosaa muuttavaa liukusäädintä. Muiden parametrien muutokset toimivat vastaavasti, mutta osassa ei ole lopun muutoshistorian päivitystä. Kaaviossa on kuvattu tilanne, jossa liukusäädin klikataan uuteen kohtaan. Jos säädintä raahattaisiin, tehtäisiin piirtävä vaihe useita kertoja, ja muutokset tallentava osa tehtäisiin siinäkin vain kerran, lopuksi. Kaaviosta on jätetty pois luokkien sisäiset metodikutsut luettavuuden takia:
 
 ![](https://raw.githubusercontent.com/tuomoart/ot-harjoitustyo/master/dokumentointi/kuvat/sekvenssikaavio.png)
 
@@ -57,3 +57,7 @@ Käyttöliittymän rakentava koodi sijaitsee pääasiassa luokan Gui metodissa s
 ### Domain
 
 luokka Fractal ei noudata optimaalisesti Single-responsibility -periaatetta, sillä se sisältää sekä fraktaalin laskemiseen että muutoshistoriaan liittyviä toimintoja. Nämä toiminnot kuitenkin molemmat käyttävät samoja parametreja, joten niiden erottelu ei tämän ohjelman laajuus huomioon ottaen ollut mielekästä.
+
+### Testaus
+
+Testaus on kohtalaisen kattavaa, ja avaintoiminnallisuudet niin luokkien sisäisesti kuin myös välisesti on yleisesti ottaen testattu. Joitain virhetilanteiden käsittelytoiminnallisuuksia ei ole testattu, sillä nämä toiminnallisuudet on kirjoitettu tuntemattomia virheitä varten ja tarkoituksenaan on se, ettei odottamattomankaan virheen sattuessa ohjelma käyttäydy odottamattomasti. Tällaisen virheen aiheuttaminen testaamista varten osoittautui hankalaksi, mutta ratkaisu saattaisi löytyä valekomponenteista.
