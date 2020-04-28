@@ -10,4 +10,6 @@
 |6.4.       |3        |Lisätty ominaisuuksia ohjelmaan, checkstyle virheettömäksi|
 |19.4.      |5        |Undo- ja reset -ominaisuudet, konfiguraatiot tiedostoon|
 |21.4.      |5        |Undo-ominaisuuden parantelua, testejä ja virheenkäsittelyä paremmaksi. Dokumentaation päivitys ja kaavioiden piirtely|
-|Yhteensä:  |26.5     | |
+|26.4.      |2        |Siivousta ja Javadoc:n kirjoitus|
+|27.4.      |2        |Arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen|
+|Yhteensä:  |30.5     | |
