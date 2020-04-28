@@ -1,8 +1,6 @@
 # Fraktaaligeneraattori
 Sovelluksen avulla on mahdollista luoda ja tarkastella Julia-fraktaaleja. Fraktaalin ominaisuuksia voi muokata sivupalkin liukuvalitsimilla ja piirtoalaa voi siirtää hiirellä vetämällä. Piirtoalueen voi tallentaa "Save"-painikkeella. Imaginääriluvun komponenttien ja iteraatioiden määrän valintoja voi peruuttaa "Undo"-painikkeella. "Reset"-painike palauttaa kaikki parametrit niiden alkuperäisiin asetuksiin.
 
-HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 ei toiminut oikein yliopiston etätyöpyödällä tai melkillä.
-
 
 ## Dokumentaatio
 
@@ -18,6 +16,7 @@ HUOM! JavaFX-versio on tällä hetkellä 11.0.2, sillä ohjeen mukainen 12.0.2 e
 ## Releaset
 
 [Viikko 5](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko5)
+[Viikko 6](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/viikko6)
 
 
 ## Komentorivitoiminnot
@@ -43,3 +42,8 @@ Jar-paketti luodaan komennolla
 
 Checkstyle-tarkistukset voidaan suorittaa komennolla
 `mvn jxr:jxr checkstyle:checkstyle`
+
+### JavaDoc
+
+JavaDocin voi luoda komennolla
+`mvn javadoc:javadoc`
