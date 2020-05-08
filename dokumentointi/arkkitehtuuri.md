@@ -57,7 +57,3 @@ Käyttöliittymän rakentava koodi sijaitsee pääasiassa luokan Gui metodissa s
 ### Domain
 
 luokka Fractal ei noudata optimaalisesti Single-responsibility -periaatetta, sillä se sisältää sekä fraktaalin laskemiseen että muutoshistoriaan liittyviä toimintoja. Nämä toiminnot kuitenkin molemmat käyttävät samoja parametreja, joten niiden erottelu ei tämän ohjelman laajuus huomioon ottaen ollut mielekästä.
-
-### Testaus
-
-Testaus on kohtalaisen kattavaa, ja avaintoiminnallisuudet niin luokkien sisäisesti kuin myös välisesti on yleisesti ottaen testattu. Joitain virhetilanteiden käsittelytoiminnallisuuksia ei ole testattu, sillä nämä toiminnallisuudet on kirjoitettu tuntemattomia virheitä varten ja tarkoituksenaan on se, ettei odottamattomankaan virheen sattuessa ohjelma käyttäydy odottamattomasti. Tällaisen virheen aiheuttaminen testaamista varten osoittautui hankalaksi, mutta ratkaisu saattaisi löytyä valekomponenteista.
