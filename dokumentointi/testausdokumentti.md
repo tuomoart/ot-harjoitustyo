@@ -9,8 +9,8 @@ Sovelluslogiikan testaamisesta huolehtivat testiluokat domain.FractalTest sekä 
 
 ### Testauskattavuus
 
-Käyttöliittymää lukuunottamatta sovelluksen testauksen rivikattavuus on 99% ja haarautumakattavuus on 100%
+Käyttöliittymää lukuunottamatta sovelluksen testauksen rivikattavuus on 100% ja haarautumakattavuus on 100%.
 
 TODO: KUVA
 
-Testaamatta jäi odottamatonta virhettä koskeva tilanne
+Käytännössä jokaista tilannetta ei ole testattu, mutta sovelluksen luonne ei vaadi jokaisen rajatapauksen erillistä testaamista. Nykyinen käyttöliittymä ei salli virheellisten syötteiden antamista, sillä syötteet annetaan liukusäätimillä tai muilla hallituilla keinoilla. Jos prametreja voisi muuttaa vapaammin, olisi kattavampi rajatapausten testaaminen aiheellista. Sovellukseen on myös kirjoitettu kohtalaisen paljon virhekäsittelyä, joka ei liity mihinkään nimenomaiseen virhetilanteeseen. Nämä käsittelyt on kirjoitettu sellaisia virhetilanteita varten, joita ei ole osattu ennustaa, mutta tämän virhekäsittelyn avulla sovellus toimii hallitulla tavalla myös odottamattomassa virhetilanteessa. Näitä odottamattomien virheiden käsittelytoimintoja ei ole kattavasti testattu.

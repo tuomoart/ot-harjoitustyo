@@ -148,16 +148,13 @@ public class Fractal {
      * Loads previous settings or loads defaults if there are no previous
      * 
      * @return 
+     * @throws Exception
      */
-    public boolean[][] undo() {
+    public boolean[][] undo() throws Exception {
         try {
             unpackSettings(history.undo());
         } catch (SQLException e) {
-            try {
-                loadToDefaults();
-            } catch (Exception ee) {
-                return null;
-            }
+            loadToDefaults();
         }
         getValues();
         return this.values;

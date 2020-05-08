@@ -121,7 +121,7 @@ public class FractalTest {
     }
     
     @Test
-    public void undoResetsToDefaultsWhenNoHistory() throws SQLException {
+    public void undoResetsToDefaultsWhenNoHistory() throws Exception {
         this.h.empty();
         
         this.fractal.setIterations(3);

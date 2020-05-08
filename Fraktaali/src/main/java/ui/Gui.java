@@ -170,22 +170,14 @@ public class Gui extends Application {
         
         //Create the drawing area
         this.drawing = new Canvas(drawArea,drawArea);
-        this.drawing.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                transX = t.getSceneX() - x0;
-                transY = t.getSceneY() - y0;
-            }
+        this.drawing.setOnMousePressed((MouseEvent t) -> {
+            transX = t.getSceneX() - x0;
+            transY = t.getSceneY() - y0;
         });
-        this.drawing.setOnMouseDragged(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                x0 = -t.getSceneX() + transX;
-                y0 = -t.getSceneY() + transY;
-                updateSettings();
-            }
+        this.drawing.setOnMouseDragged((MouseEvent t) -> {
+            x0 = -t.getSceneX() + transX;
+            y0 = -t.getSceneY() + transY;
+            updateSettings();
         });
         this.drawer = this.drawing.getGraphicsContext2D();
         layout.setCenter(this.drawing);
@@ -315,9 +307,9 @@ public class Gui extends Application {
      * Undoes the latest change made. Only applicable to imaginary number components and number of iterations.
      */
     public void undo() {
-        this.grid = generator.undo();
-        
-        if (this.grid == null) {
+        try {
+            this.grid = generator.undo();
+        } catch (Exception e) {
             showError("Unknown error. The program will now close.");
             Platform.exit();
         }
