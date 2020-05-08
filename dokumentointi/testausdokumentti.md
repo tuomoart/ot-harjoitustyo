@@ -12,7 +12,7 @@ Sovelluslogiikan testaamisesta huolehtivat testiluokat domain.FractalTest sekä 
 
 Käyttöliittymää lukuunottamatta sovelluksen testauksen rivikattavuus on 100% ja haarautumakattavuus on 100%.
 
-TODO: KUVA
+![](https://raw.githubusercontent.com/tuomoart/ot-harjoitustyo/master/dokumentointi/kuvat/testikattavuusraportti.png)
 
 Käytännössä jokaista tilannetta ei ole testattu, mutta sovelluksen luonne ei vaadi jokaisen rajatapauksen erillistä testaamista. Nykyinen käyttöliittymä ei salli virheellisten syötteiden antamista, sillä syötteet annetaan liukusäätimillä tai muilla hallituilla keinoilla. Jos prametreja voisi muuttaa vapaammin, olisi kattavampi rajatapausten testaaminen aiheellista. Sovellukseen on myös kirjoitettu kohtalaisen paljon virhekäsittelyä, joka ei liity mihinkään nimenomaiseen virhetilanteeseen. Nämä käsittelyt on kirjoitettu sellaisia virhetilanteita varten, joita ei ole osattu ennustaa, mutta tämän virhekäsittelyn avulla sovellus toimii hallitulla tavalla myös odottamattomassa virhetilanteessa. Näitä odottamattomien virheiden käsittelytoimintoja ei ole kattavasti testattu.
 
@@ -20,6 +20,3 @@ Käytännössä jokaista tilannetta ei ole testattu, mutta sovelluksen luonne ei
 ## Järjestelmätestaus
 
 Sovelluksen järjestelmätestaus on suoritettu manuaalisesti. Kaikki määrittelydokumentin ja käyttöohjeen listaamat toiminnallisuudet on testattu. Järjestelmätestaus on suoritettu Linux-ympäristössä Helsingin yliopiston Cubbli -alustalla. Testaus on tehty ainoastaan paikallisella laitteella, sillä yliopiston Cubbli-etätyöpöydillä JavaFX- sekä tietokantatoiminnot eivät ole toimineet. Ongelmat ovat koskeneet myös muita kurssin harjoitustöitä, ja sen perusteella on todettu, etteivät ongelmat johdu tästä ohjelmasta.
-
-
-### Sovellukseen jääneet laatuongelmat
