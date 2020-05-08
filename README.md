@@ -1,5 +1,5 @@
 # Fraktaaligeneraattori
-Sovelluksen avulla on mahdollista luoda ja tarkastella Julia-fraktaaleja. Fraktaalin ominaisuuksia voi muokata sivupalkin liukuvalitsimilla ja piirtoalaa voi siirtää hiirellä vetämällä. Piirtoalueen voi tallentaa "Save"-painikkeella. Imaginääriluvun komponenttien ja iteraatioiden määrän valintoja voi peruuttaa "Undo"-painikkeella. "Reset"-painike palauttaa kaikki parametrit niiden alkuperäisiin asetuksiin.
+Sovelluksen avulla on mahdollista luoda ja tarkastella Julia-fraktaaleja.
 
 
 ## Dokumentaatio
