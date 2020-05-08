@@ -4,26 +4,28 @@
 Sovelluksella on mahdollista muodostaa julia-joukon fraktaaleja ja tarkastella niitä. Luodun fraktaalin voi tallentaa kuvana tiedostoon.
 
 
-## Käyttöliittymäluonnos
+## Käyttöliittymä
 
 Sovellus koostuu yhdestä näkymästä, virheilmoitus-ikkunoista ja se käyttää myös käyttöjärjestelmän tiedostonvalitsinta.
 
 
-## Perusversion tarjoama toiminnallisuus
+## Sovelluksen tarjoamat toiminnallisuudet
 
 Sovelluksen perustoiminnallisuudet:
-- Käytettävän imaginääriluvun valinta (tehty)
-- Piirretyn fraktaalin tallentaminen (tehty)
-- Piirtoalan siirtely hiirellä vetämällä (tehty)
-- Piirtoalan zoomaaminen (tehty)
-- Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan (tehty)
-- Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan (tehty)
-- Reset-nappi (tehty)
-- Undo-nappi (tehty)
-- Kuvan tallennus tiedostoon (tehty)
+- Käytettävän imaginääriluvun valinta
+- Piirretyn fraktaalin tallentaminen
+- Piirtoalan siirtely hiirellä vetämällä
+- Piirtoalan zoomaaminen
+- Reaaliaikainen uudelleenpiirto kun piirtoaluetta muokataan
+- Reaaliaikainen uudelleenpiirto kun imaginäärilukua muokataan
+- Reset-toiminto
+- Undo-toiminto
+- Kuvan tallennus tiedostoon
 
 ## Jatkokehitys
 
-Jos ja kun aikaa jää, voisi sovellukseen lisätä seuraavia toimintoja:
+Ohjelmaa olisi mahdollista laajentaa tai parantaa esimerkiksi seuraavasti:
 
-- Piirtoalan siirtelyä pitäisi parantaa, nyt on liian hidas ja epävarma
+- Piirtoalan siirtelyä pitäisi parantaa, nyt se on kohtuullisen hidas ja epävarma
+- Muokattavissa olevia parametreja voisi lisätä
+- Sovelluksen voisi rakentaa piirtämään myös muita fraktaalikuvioita
