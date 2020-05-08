@@ -175,7 +175,6 @@ public class Fractal {
      * @return Boolean table where values are true if pixel belongs to the set
      */
     public boolean[][] generateJuliaSet(int w, int h) {
-        //TODO check if the parameters are still necessary
         this.width = w;
         this.height = h;
         

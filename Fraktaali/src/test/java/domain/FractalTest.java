@@ -129,6 +129,5 @@ public class FractalTest {
         this.fractal.undo();
         
         assertEquals(defaultIterations, this.fractal.getIterations());
-        //TODO ensure all parameters, not just this one
     }
 }
