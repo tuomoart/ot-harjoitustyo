@@ -13,4 +13,5 @@
 |26.4.      |2        |Siivousta ja Javadoc:n kirjoitus|
 |27.4.      |2        |Arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen|
 |28.4.      |1        |JavaDoc loppuun ja dokumentaation parantelua|
-|Yhteensä:  |31.5     | |
+|8.5.       |3        |Koodin siistintää, testausdokumentin kirjoitus ja dokumentaation yleistä viimeistelyä|
+|Yhteensä:  |34.5     | |

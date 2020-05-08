@@ -33,6 +33,7 @@ domain.Fractal käyttää parametrien muutoshistoriaa sille konstruktorin parame
 
 Muutoshistoriaa käytetään dao.HistoryDao-rajapinnan avulla. Tässä ohjelmassa käytetty dao.HistoryDao-rajapinnan toteuttava luokka on dao.SQLiteHistoryDao. Se tarjoaa muutoshistorian käyttäen SQLite-tietokantaa. Luokka osaa tallettaa merkkijonotyyppistä tietoa ja noutaa sitä poistaen ja palauttaen viimeisimmän rivin. Se osaa myös tyhjentää tietokannan. domain.Fractal antaa metodikutsussaan String-tyyppisen parametrin, jossa asetuksen on formatoitu muotoon `iteraatiot,reaaliosa,imaginääriosa`. Tietoa noudettaessa dao.SQLiteHistoryDao palauttaa tällaisen merkkijonon, ja Fractal hoitaa parametrien purkamisen takaisin käyttökelpoiseen muotoon. SQLite-tietokannassa on merkkijonon lisäksi mukana id-numero, joka mahdollistaa viimeisimmän rivin noutamisen.
 
+
 ### Konfiguraatiot
 
 Ohjelman oletusasetukset on talletettu konfiguraatiotiedostoon resources.config.properties. Tätä käytetään Javan Properties-olion avulla. Konfiguraatiotiedosto ei ole tarkoitettu käyttäjän muokattavaksi, joten se on sijoitettu sisäänrakennetuksi resurssiksi. Näin ohjelman käyttöönotto saadaan käyttäjälle mutkattomaksi. Ohjelmaan voisi tehdä toiminnallisuuden, jolla oletusasetuksia on mahdollista muuttaa.

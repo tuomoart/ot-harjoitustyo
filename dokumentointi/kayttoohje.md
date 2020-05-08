@@ -1,5 +1,7 @@
 # Käyttöohje
 
+Lataa tiedosto [Fractalgenerator.jar](https://github.com/tuomoart/ot-harjoitustyo/releases/tag/loppupalautus)
+
 ## Konfigurointi
 
 Ohjelma ei vaadi erillistä konfigurointia
@@ -7,6 +9,7 @@ Ohjelma ei vaadi erillistä konfigurointia
 
 ## Ohjelman käynnistäminen
 
+Ohjelman saa käynnistettyä komennolla `java -jar Fractalgenerator.jar`.
 
 
 ## Käyttö
