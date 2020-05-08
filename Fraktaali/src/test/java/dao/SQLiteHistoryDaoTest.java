@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import dao.SQLiteHistoryDao;
 import domain.Fractal;
@@ -32,17 +32,14 @@ public class SQLiteHistoryDaoTest {
     
     @Before
     public void setUp() throws Exception {
-        try {
-            this.properties = new Properties();
-            properties.load(this.getClass().getResourceAsStream("/testConfig.properties"));
-            this.dao = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
-        } catch (SQLException e) {
-            
-        }
+        this.properties = new Properties();
+        properties.load(this.getClass().getResourceAsStream("/testConfig.properties"));
+        this.dao = new SQLiteHistoryDao(properties.getProperty("testHistoryDatabase"));
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception {
+        this.dao.empty();
     }
     
     @Test
